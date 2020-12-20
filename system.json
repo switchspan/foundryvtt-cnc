@@ -1,0 +1,34 @@
+{
+  "name": "cnc",
+  "title": "Castles & Crusades",
+  "description": "Castles & Crusades from Troll Lord Games",
+  "version": 0.1,
+  "minimumCoreVersion": "0.6.6",
+  "compatibleCoreVersion": "0.7.8",
+  "templateVersion": 2,
+  "author": "Kenneth Taylor",
+  "contributors": { "name" : "Ken Taylor", "email" : "taylor.kenneth@gmail.com" },
+  "esmodules": [
+    "module/cnc.js"
+  ],
+  "styles": [
+    "styles/cnc.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "luck",
+  "socket": true,
+  "initiative": "1d20 + @attributes.init.value",
+  "url": "https://github.com/switchspan/foundryvtt-cnc/",
+  "manifest": "https://github.com/switchspan/foundryvtt-cnc/raw/master/system.json",
+  "download": "https://github.com/switchspan/foundryvtt-cnc//archive/v0.0.1.zip",
+  "license": "LICENSE.txt"
+}
