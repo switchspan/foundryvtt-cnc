@@ -1,0 +1,55 @@
+{
+  "author": "Ken Taylor <taylor.kenneth@gmail.com>",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/switchspan/foundryvtt-cnc/issues"
+  },
+  "description": "Castles and Crusades RPG Support for Foundry VTT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
+    "jest": "^26.1.0",
+    "node-sass": "^4.14.1",
+    "standard": "^14.3.4"
+  },
+  "directories": {
+    "test": "module/tests"
+  },
+  "homepage": "https://github.com/switchspan/foundryvtt-cnc#readme",
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/module/__mocks__/foundry.js",
+      "<rootDir>/module/__mocks__/item.js"
+    ],
+    "verbose": true
+  },
+  "keywords": [
+    "FoundryVTT",
+    "CNC",
+    "Castles and Crusades"
+  ],
+  "license": "MIT",
+  "main": "module/cnc.js",
+  "name": "cnc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/switchspan/foundryvtt-cnc.git"
+  },
+  "scripts": {
+    "format": "standard --fix",
+    "test": "jest",
+    "scss": "node-sass styles/cnc.scss styles/cnc.css"
+  },
+  "version": "0.0.1"
+}
