@@ -26,6 +26,6 @@ reach out on the Foundry Community Discord with any questions care of _@KillerRa
 
 ###### Hat Tip
 * [Andrew Clayton's Foundry VTT - DnD5e Game System](https://gitlab.com/foundrynet/dnd5e/)
-* [Tim White's Foundtry VTT DCC Game System Code](https://github.com/cyface/foundryvtt-dcc)
+* [Tim White's Foundry VTT - DCC Game System](https://github.com/cyface/foundryvtt-dcc)
 
 _Based on material &copy;2020 Troll Lord Games._
