@@ -1,5 +1,31 @@
 {
+  "name": "cnc",
+  "version": "0.0.1",
+  "description": "Castles and Crusades RPG Support for Foundry VTT",
+  "keywords": [
+    "FoundryVTT",
+    "CNC",
+    "Castles and Crusades"
+  ],
+  "homepage": "https://github.com/switchspan/foundryvtt-cnc#readme",
+  "bugs": {
+    "url": "https://github.com/switchspan/foundryvtt-cnc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/switchspan/foundryvtt-cnc.git"
+  },
+  "license": "MIT",
   "author": "Ken Taylor <taylor.kenneth@gmail.com>",
+  "main": "module/cnc.js",
+  "directories": {
+    "test": "module/tests"
+  },
+  "scripts": {
+    "format": "standard --fix",
+    "scss": "node-sass styles/cnc.scss styles/cnc.css",
+    "test": "jest"
+  },
   "babel": {
     "presets": [
       [
@@ -12,21 +38,6 @@
       ]
     ]
   },
-  "bugs": {
-    "url": "https://github.com/switchspan/foundryvtt-cnc/issues"
-  },
-  "description": "Castles and Crusades RPG Support for Foundry VTT",
-  "devDependencies": {
-    "@babel/preset-env": "^7.10.4",
-    "babel-jest": "^26.1.0",
-    "jest": "^26.1.0",
-    "node-sass": "^4.14.1",
-    "standard": "^14.3.4"
-  },
-  "directories": {
-    "test": "module/tests"
-  },
-  "homepage": "https://github.com/switchspan/foundryvtt-cnc#readme",
   "jest": {
     "setupFiles": [
       "<rootDir>/module/__mocks__/foundry.js",
@@ -34,22 +45,12 @@
     ],
     "verbose": true
   },
-  "keywords": [
-    "FoundryVTT",
-    "CNC",
-    "Castles and Crusades"
-  ],
-  "license": "MIT",
-  "main": "module/cnc.js",
-  "name": "cnc",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/switchspan/foundryvtt-cnc.git"
-  },
-  "scripts": {
-    "format": "standard --fix",
-    "test": "jest",
-    "scss": "node-sass styles/cnc.scss styles/cnc.css"
-  },
-  "version": "0.0.1"
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
+    "jest": "^26.1.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.2.1",
+    "standard": "^14.3.4"
+  }
 }
