@@ -1,0 +1,22 @@
+@import "grid";
+
+// Globals
+@font-face {
+  font-family: "Goudy Old Style";
+  src: url("fonts/ufonts.com_goudyoldstylebt-roman-opentype.otf") format("otf");
+}
+
+@font-face {
+  font-family: "Goudy Old Style Bold";
+  src: url("fonts/ufonts.com_goudyoldstylebt-bold-opentype.otf") format("otf");
+}
+
+@font-face {
+  font-family: "VTC Goblin Hand";
+  src: url("fonts/ufonts.com_vtcgoblinhand.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "VTC Goblin Hand SC";
+  src: url("fonts/ufonts.com_vtcgoblinhandsc.ttf") format("truetype");
+}
