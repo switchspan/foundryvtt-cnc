@@ -1,80 +1,80 @@
 {
-  "name": "dnd5e",
-  "title": "DnD5e - Fifth Edition System",
-  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "1.2.0",
-  "author": "Atropos",
+  "name": "cnc",
+  "title": "Castles & Crusades - Fantasy Role Playing System",
+  "description": "A system for playing Castles & Crusades by Troll Lord Games in the Foundry Virtual Tabletop environment.",
+  "version": "0.0.2",
+  "author": "switchspan",
   "scripts": [],
-  "esmodules": ["dnd5e.js"],
-  "styles": ["dnd5e.css"],
+  "esmodules": ["cnc.js"],
+  "styles": ["cnc.css"],
   "packs": [
     {
       "name": "heroes",
       "label": "Starter Heroes",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/heroes.db",
       "entity": "Actor"
     },
     {
       "name": "monsters",
       "label": "Monsters (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/monsters.db",
       "entity": "Actor"
     },
     {
       "name": "items",
       "label": "Items (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/items.db",
       "entity": "Item"
     },
     {
       "name": "tradegoods",
       "label": "Trade Goods (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/tradegoods.db",
       "entity": "Item"
     },
     {
       "name": "spells",
       "label": "Spells (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/spells.db",
       "entity": "Item"
     },
     {
       "name": "classes",
       "label": "Classes (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/classes.db",
       "entity": "Item"
     },
     {
       "name": "classfeatures",
       "label": "Class Features (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/classfeatures.db",
       "entity": "Item"
     },
     {
       "name": "races",
       "label": "Racial Features (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/races.db",
       "entity": "Item"
     },
     {
       "name": "monsterfeatures",
       "label": "Monster Features (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/monsterfeatures.db",
       "entity": "Item"
     },
     {
       "name": "rules",
       "label": "Rules (SRD)",
-      "system": "dnd5e",
+      "system": "cnc",
       "path": "./packs/rules.db",
       "entity": "JournalEntry"
     }
@@ -93,7 +93,7 @@
   "secondaryTokenAttribute": null,
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.9",
-  "url": "https://gitlab.com/foundrynet/dnd5e",
-  "manifest": "https://gitlab.com/foundrynet/dnd5e/raw/master/system.json",
-  "download": "https://gitlab.com/foundrynet/dnd5e/-/archive/release-1.2.0/dnd5e-release-1.2.0.zip"
+  "url": "https://github.com/switchspan/foundryvtt-cnc",
+  "manifest": "https://raw.githubusercontent.com/switchspan/foundryvtt-cnc/main/system.json",
+  "download": "https://github.com/switchspan/foundryvtt-cnc/archive/v0.0.2-alpha.zip"
 }
