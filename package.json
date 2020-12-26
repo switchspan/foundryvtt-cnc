@@ -17,40 +17,12 @@
   },
   "license": "MIT",
   "author": "Ken Taylor <taylor.kenneth@gmail.com>",
-  "main": "module/cnc.js",
-  "directories": {
-    "test": "module/tests"
-  },
+  "main": "cnc.js",
   "scripts": {
-    "format": "standard --fix",
-    "scss": "node-sass styles/cnc.scss styles/cnc.css",
-    "test": "jest"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/module/__mocks__/foundry.js",
-      "<rootDir>/module/__mocks__/item.js"
-    ],
-    "verbose": true
+    "build": "gulp"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.10.4",
-    "babel-jest": "^26.1.0",
-    "jest": "^26.1.0",
-    "node-sass": "^4.14.1",
-    "prettier": "^2.2.1",
-    "standard": "^14.3.4"
+    "gulp": "^4.0.2",
+    "gulp-less": "^4.0.1"
   }
 }
