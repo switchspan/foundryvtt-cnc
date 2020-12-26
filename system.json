@@ -1,9 +1,9 @@
 {
   "name": "cnc",
   "title": "Castles & Crusades - Fantasy Role Playing System",
-  "description": "A system for playing Castles & Crusades by Troll Lord Games in the Foundry Virtual Tabletop environment.",
-  "version": "0.0.2",
-  "author": "switchspan",
+  "description": "Castles & Crusades by Troll Lord Games",
+  "version": "0.0.3",
+  "author": "Ken Taylor",
   "scripts": [],
   "esmodules": ["cnc.js"],
   "styles": ["cnc.css"],
@@ -95,5 +95,5 @@
   "compatibleCoreVersion": "0.7.9",
   "url": "https://github.com/switchspan/foundryvtt-cnc",
   "manifest": "https://raw.githubusercontent.com/switchspan/foundryvtt-cnc/main/system.json",
-  "download": "https://github.com/switchspan/foundryvtt-cnc/archive/v0.0.2-alpha.zip"
+  "download": "https://github.com/switchspan/foundryvtt-cnc/archive/v0.0.3-alpha.zip"
 }
