@@ -5,29 +5,29 @@
         <section class="header-details flexrow">
             <h1 class="charnam">
                 <input name="name" type="text" value="{{actor.name}}"
-                       placeholder="{{localize 'DND5E.Name'}}">
+                       placeholder="{{localize 'CNC.Name'}}">
             </h1>
             <ul class="summary flexrow">
                 <li>
                     <span>{{lookup config.actorSizes data.traits.size}}</span>
                 </li>
                 <li>
-                    <span>{{localize 'DND5E.Vehicle'}}</span>
+                    <span>{{localize 'CNC.Vehicle'}}</span>
                 </li>
                 <li>
                     <input type="text" name="data.traits.dimensions"
                            value="{{data.traits.dimensions}}"
-                           placeholder="{{localize 'DND5E.Dimensions'}}">
+                           placeholder="{{localize 'CNC.Dimensions'}}">
                 </li>
                 <li>
                     <input type="text" name="data.details.source"
                            value="{{data.details.source}}"
-                           placeholder="{{localize 'DND5E.Source'}}">
+                           placeholder="{{localize 'CNC.Source'}}">
                 </li>
             </ul>
             <ul class="attributes flexrow">
                 <li class="attribute health">
-                    <h4 class="attribute-name box-title">{{localize 'DND5E.HitPoints'}}</h4>
+                    <h4 class="attribute-name box-title">{{localize 'CNC.HitPoints'}}</h4>
                     <div class="attribute-value multiple">
                         <input name="data.attributes.hp.value" type="text" placeholder="&mdash;"
                                value="{{data.attributes.hp.value}}" data-dtype="Number">
@@ -37,15 +37,15 @@
                     </div>
                     <footer class="attribute-footer">
                         <input name="data.attributes.hp.dt" type="text" class="temphp"
-                               placeholder="{{localize 'DND5E.Threshold'}}"
+                               placeholder="{{localize 'CNC.Threshold'}}"
                                value="{{data.attributes.hp.dt}}" data-dtype="Number">
                         <input name="data.attributes.hp.mt" type="text" class="temphp"
-                               placeholder="{{localize 'DND5E.VehicleMishap'}}"
+                               placeholder="{{localize 'CNC.VehicleMishap'}}"
                                value="{{data.attributes.hp.mt}}" data-dtype="Number">
                     </footer>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize 'DND5E.ArmorClass'}}</h4>
+                    <h4 class="attribute-name box-title">{{localize 'CNC.ArmorClass'}}</h4>
                     <div class="attribute-value">
                         <input name="data.attributes.ac.value" type="text" placeholder="&mdash;"
                                value="{{data.attributes.ac.value}}" data-dtype="Number">
@@ -56,7 +56,7 @@
                     </footer>
                 </li>
                 <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize 'DND5E.Speed'}}</h4>
+                    <h4 class="attribute-name box-title">{{localize 'CNC.Speed'}}</h4>
                     <div class="attribute-value">
                         <input name="data.attributes.speed" type="text" placeholder="&mdash;" value="{{data.attributes.speed}}"/>
                     </div>
@@ -66,10 +66,10 @@
     </header>
 
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{localize 'DND5E.Attributes'}}</a>
-        <a class="item" data-tab="features">{{localize 'DND5E.Features'}}</a>
-        <a class="item" data-tab="cargo">{{localize 'DND5E.VehicleCargoCrew'}}</a>
-        <a class="item" data-tab="biography">{{localize 'DND5E.Description'}}</a>
+        <a class="item active" data-tab="attributes">{{localize 'CNC.Attributes'}}</a>
+        <a class="item" data-tab="features">{{localize 'CNC.Features'}}</a>
+        <a class="item" data-tab="cargo">{{localize 'CNC.VehicleCargoCrew'}}</a>
+        <a class="item" data-tab="biography">{{localize 'CNC.Description'}}</a>
     </nav>
 
     <section class="sheet-body">
@@ -81,7 +81,7 @@
                     <input class="ability-score" name="data.abilities.{{id}}.value" type="text"
                            value="{{ability.value}}" data-dtype="Number" placeholder="0">
                     <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="{{localize 'DND5E.Modifier'}}">
+                        <span class="ability-mod" title="{{localize 'CNC.Modifier'}}">
                             {{numberFormat ability.mod decimals=0 sign=true}}
                         </span>
                     </div>
@@ -91,7 +91,7 @@
             <section class="center-pane flexcol">
                 <div class="counters">
                     <div class="counter flexrow creature-cap">
-                        <h4>{{localize 'DND5E.VehicleCreatureCapacity'}}</h4>
+                        <h4>{{localize 'CNC.VehicleCreatureCapacity'}}</h4>
                         <div class="counter-value">
                             <input type="text" placeholder="&mdash;"
                                    name="data.attributes.capacity.creature"
@@ -99,14 +99,14 @@
                         </div>
                     </div>
                     <div class="counter flexrow cargo-cap">
-                        <h4>{{localize 'DND5E.VehicleCargoCapacity'}}</h4>
+                        <h4>{{localize 'CNC.VehicleCargoCapacity'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.capacity.cargo" placeholder="0"
                                    data-dtype="Number" value="{{data.attributes.capacity.cargo}}">
                         </div>
                     </div>
                     <div class="counter flexrow stations">
-                        <h4>{{localize 'DND5E.VehicleActionStations'}}</h4>
+                        <h4>{{localize 'CNC.VehicleActionStations'}}</h4>
                         <div class="counter-value">
                             <input name="data.attributes.actions.stations" type="checkbox"
                                    data-dtype="Boolean" value="{{data.attributes.actions.stations}}"
@@ -114,14 +114,14 @@
                         </div>
                     </div>
                     <div class="counter flexrow actions">
-                        <h4>{{localize 'DND5E.ActionPl'}}</h4>
+                        <h4>{{localize 'CNC.ActionPl'}}</h4>
                         <div class="counter-value">
                             <input type="text" name="data.attributes.actions.value" placeholder="0"
                                    data-dtype="Number" value="{{data.attributes.actions.value}}">
                         </div>
                     </div>
                     <div class="counter flexrow action-thresholds">
-                        <h4>{{localize 'DND5E.VehicleActionThresholds'}}</h4>
+                        <h4>{{localize 'CNC.VehicleActionThresholds'}}</h4>
                         <div class="counter-value">
                             <span class="sep">&lt;</span>
                             <input type="text" placeholder="&mdash;" data-dtype="Number"
@@ -138,16 +138,16 @@
                         </div>
                     </div>
                 </div>
-                {{> 'systems/dnd5e/templates/actors/parts/actor-traits.html'}}
+                {{> 'systems/cnc/templates/actors/parts/actor-traits.html'}}
             </section>
         </div>
 
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> 'systems/dnd5e/templates/actors/parts/actor-features.html' sections=features}}
+            {{> 'systems/cnc/templates/actors/parts/actor-features.html' sections=features}}
         </div>
 
         <div class="tab cargo flexcol" data-group="primary" data-tab="cargo">
-            {{> 'systems/dnd5e/templates/actors/parts/actor-inventory.html' sections=cargo}}
+            {{> 'systems/cnc/templates/actors/parts/actor-inventory.html' sections=cargo}}
         </div>
 
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
