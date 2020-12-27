@@ -15,8 +15,8 @@ export const registerSystemSettings = function () {
    * Register resting variants
    */
   game.settings.register("cnc", "restVariant", {
-    name: "Rest variant",
-    hint: "Register resting variants",
+    name: "Resting (5e Variant Rule)",
+    hint: "Set the downtime days rules for PCs resting",
     scope: "world",
     config: true,
     default: "normal",
@@ -35,15 +35,15 @@ export const registerSystemSettings = function () {
    * See: https://www.reddit.com/r/DnD/comments/3g0uuq/5e_diagonals_and_split_movement/
    */
   game.settings.register("cnc", "diagonalMovement", {
-    name: "Diagonal Movement Rule",
+    name: "Diagonal movement rule",
     hint: "Register diagonal movement rule setting",
     scope: "world",
     config: true,
     default: "555",
     type: String,
     choices: {
-      555: "D&D 5e 5-5-5",
-      5105: "D&D 3.5 5-10-5",
+      555: "D&D 5e (5-5-5)",
+      5105: "D&D 3.5 (5-10-5)",
       EUCL: "Euclidean",
     },
     onChange: (rule) => (canvas.grid.diagonalRule = rule),
@@ -53,8 +53,8 @@ export const registerSystemSettings = function () {
    * Register Initiative formula setting
    */
   game.settings.register("cnc", "initiativeDexTiebreaker", {
-    name: "Dexerity Initiative Tiebreaker",
-    hint: "Use Dexterity for the initiative tiebreaker",
+    name: "Dexterity initiative tiebreaker",
+    hint: "Use Dexterity as a tiebreaker for initiative rolls",
     scope: "world",
     config: true,
     default: true,
@@ -66,7 +66,7 @@ export const registerSystemSettings = function () {
    * Require Currency Carrying Weight
    */
   game.settings.register("cnc", "currencyWeight", {
-    name: "Require Currency Carrying Weight",
+    name: "Require currency carrying weight",
     hint: "Require carrying weight for character's currency",
     scope: "world",
     config: true,
@@ -78,7 +78,7 @@ export const registerSystemSettings = function () {
    * Option to disable XP bar for session-based or story-based advancement.
    */
   game.settings.register("cnc", "disableExperienceTracking", {
-    name: "Disable Experience Tracking",
+    name: "Disable XP tracking",
     hint: "Disable experience (XP) tracking for characters",
     scope: "world",
     config: true,
@@ -90,7 +90,7 @@ export const registerSystemSettings = function () {
    * Option to automatically collapse Item Card descriptions
    */
   game.settings.register("cnc", "autoCollapseItemCards", {
-    name: "Auto Collapse Item Cards",
+    name: "Auto-collapse item cards",
     hint: "Automatically collapse item card descriptions in chat",
     scope: "client",
     config: true,
@@ -105,7 +105,7 @@ export const registerSystemSettings = function () {
    * Option to allow GMs to restrict polymorphing to GMs only.
    */
   game.settings.register("cnc", "allowPolymorphing", {
-    name: "Restrict Polymorphing to Castle Keepers",
+    name: "Restrict polymorphing to Castle Keepers",
     hint: "Restrict polymorphing to Castle Keepers only",
     scope: "world",
     config: true,
