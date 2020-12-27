@@ -19,7 +19,8 @@
   "author": "Ken Taylor <taylor.kenneth@gmail.com>",
   "main": "cnc.js",
   "scripts": {
-    "build": "gulp",
+    "build": "gulp css",
+    "build:watch": "gulp",
     "preversion": "npm run build",
     "version": "gulp bump && git add system.json && git add package.json",
     "postversion": "git push && git push --tags"
