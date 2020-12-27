@@ -32,6 +32,7 @@ export const registerSystemSettings = function () {
   //TODO: See if we need diagonal movement rules and
   /**
    * Register diagonal movement rule setting
+   * See: https://www.reddit.com/r/DnD/comments/3g0uuq/5e_diagonals_and_split_movement/
    */
   game.settings.register("cnc", "diagonalMovement", {
     name: "Diagonal Movement Rule",
