@@ -25,6 +25,7 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-bump": "^3.2.0",
+    "gulp-json-modify": "^1.0.2",
     "gulp-less": "^4.0.1",
     "json-bump": "^1.0.2",
     "prettier": "2.2.1"

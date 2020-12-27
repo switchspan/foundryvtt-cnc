@@ -28,4 +28,4 @@ jobs:
             Changes in this Release
             - Updates for alpha release
           draft: false
-          prerelease: true
+          prerelease: false

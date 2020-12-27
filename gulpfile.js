@@ -1,6 +1,7 @@
 const gulp = require("gulp");
 const less = require("gulp-less");
 const bump = require("gulp-bump");
+const jsonModify = require("gulp-json-modify");
 const pkg = require("./package.json");
 
 /* ----------------------------------------- */
@@ -19,8 +20,20 @@ const css = gulp.series(compileLESS);
 gulp.task("bump", function () {
   let options = {};
   options.version = pkg.version;
+  let downloadFilePath = `https://github.com/switchspan/foundryvtt-cnc/archive/v${pkg.version}.zip`;
 
-  return gulp.src(["./system.json"]).pipe(bump(options)).pipe(gulp.dest("./"));
+  return gulp
+    .src(["./system.json"])
+    .pipe(bump(options))
+    .pipe(jsonModify({ key: "download", value: downloadFilePath }))
+    .pipe(gulp.dest("./"));
+});
+
+/* ----------------------------------------- */
+/*  Bump version number in the download file
+/* ----------------------------------------- */
+gulp.task("bump-download", function () {
+  return gulp.src("./system.json");
 });
 
 /* ----------------------------------------- */
