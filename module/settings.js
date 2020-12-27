@@ -15,7 +15,7 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "restVariant", {
     name: "SETTINGS.CncRestN",
-    hint: "SETTINGS.CncRestL",
+    hint: "Register resting variants",
     scope: "world",
     config: true,
     default: "normal",
@@ -32,7 +32,7 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "diagonalMovement", {
     name: "SETTINGS.CncDiagN",
-    hint: "SETTINGS.CncDiagL",
+    hint: "Register diagonal movement rule setting",
     scope: "world",
     config: true,
     default: "555",
@@ -50,10 +50,10 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "initiativeDexTiebreaker", {
     name: "SETTINGS.CncInitTBN",
-    hint: "SETTINGS.CncInitTBL",
+    hint: "Use Dexterity for the initiative tiebreaker",
     scope: "world",
     config: true,
-    default: false,
+    default: true,
     type: Boolean,
   });
 
@@ -62,7 +62,7 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "currencyWeight", {
     name: "SETTINGS.CncCurWtN",
-    hint: "SETTINGS.CncCurWtL",
+    hint: "Require currency carrying weight",
     scope: "world",
     config: true,
     default: true,
@@ -74,7 +74,7 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "disableExperienceTracking", {
     name: "SETTINGS.CncNoExpN",
-    hint: "SETTINGS.CncNoExpL",
+    hint: "Disable experience (XP) tracking",
     scope: "world",
     config: true,
     default: false,
@@ -86,7 +86,7 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "autoCollapseItemCards", {
     name: "SETTINGS.CncAutoCollapseCardN",
-    hint: "SETTINGS.CncAutoCollapseCardL",
+    hint: "Automatically collapse item card descriptions in chat",
     scope: "client",
     config: true,
     default: false,
@@ -101,7 +101,7 @@ export const registerSystemSettings = function () {
    */
   game.settings.register("cnc", "allowPolymorphing", {
     name: "SETTINGS.CncAllowPolymorphingN",
-    hint: "SETTINGS.CncAllowPolymorphingL",
+    hint: "Restrict polymorphing to Castle Keepers only",
     scope: "world",
     config: true,
     default: false,
