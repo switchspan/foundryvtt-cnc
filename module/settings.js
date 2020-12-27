@@ -32,7 +32,7 @@ export const registerSystemSettings = function () {
    * Register diagonal movement rule setting
    */
   game.settings.register("cnc", "diagonalMovement", {
-    name: "CNC.SettingDiagonalMovementRule",
+    name: "Diagonal Movement Rule",
     hint: "Register diagonal movement rule setting",
     scope: "world",
     config: true,
@@ -50,20 +50,21 @@ export const registerSystemSettings = function () {
    * Register Initiative formula setting
    */
   game.settings.register("cnc", "initiativeDexTiebreaker", {
-    name: "SETTINGS.CncInitTBN",
+    name: "Dexerity Initiative Tiebreaker",
     hint: "Use Dexterity for the initiative tiebreaker",
     scope: "world",
     config: true,
     default: true,
     type: Boolean,
+    onChange: (value) => console.log(value),
   });
 
   /**
    * Require Currency Carrying Weight
    */
   game.settings.register("cnc", "currencyWeight", {
-    name: "SETTINGS.CncCurWtN",
-    hint: "Require currency carrying weight",
+    name: "Require Currency Carrying Weight",
+    hint: "Require carrying weight for character's currency",
     scope: "world",
     config: true,
     default: true,
@@ -74,8 +75,8 @@ export const registerSystemSettings = function () {
    * Option to disable XP bar for session-based or story-based advancement.
    */
   game.settings.register("cnc", "disableExperienceTracking", {
-    name: "SETTINGS.CncNoExpN",
-    hint: "Disable experience (XP) tracking",
+    name: "Disable Experience Tracking",
+    hint: "Disable experience (XP) tracking for characters",
     scope: "world",
     config: true,
     default: false,
@@ -86,7 +87,7 @@ export const registerSystemSettings = function () {
    * Option to automatically collapse Item Card descriptions
    */
   game.settings.register("cnc", "autoCollapseItemCards", {
-    name: "SETTINGS.CncAutoCollapseCardN",
+    name: "Auto Collapse Item Cards",
     hint: "Automatically collapse item card descriptions in chat",
     scope: "client",
     config: true,
@@ -101,7 +102,7 @@ export const registerSystemSettings = function () {
    * Option to allow GMs to restrict polymorphing to GMs only.
    */
   game.settings.register("cnc", "allowPolymorphing", {
-    name: "SETTINGS.CncAllowPolymorphingN",
+    name: "Restrict Polymorphing to Castle Keepers",
     hint: "Restrict polymorphing to Castle Keepers only",
     scope: "world",
     config: true,
