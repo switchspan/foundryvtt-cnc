@@ -18,7 +18,7 @@ If you wish to manually install the system, you must clone or extract it into th
 
 Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge
 requests for code changes. Approval for such requests involves code and (if necessary) design review by Switchspan. Please
-reach out on the Foundry Community Discord with any questions care of _@KillerRabbit_.  
+reach out on the [Troll Lord Games Discord][trolllord-discord] or [Foundry Community Discord][foundry-discord] with any questions care of _@KillerRabbit_.  
 
 
 
@@ -34,3 +34,6 @@ reach out on the Foundry Community Discord with any questions care of _@KillerRa
 * [Tim White's Foundry VTT - DCC Game System](https://github.com/cyface/foundryvtt-dcc)
 
 _Based on material &copy;2020 Troll Lord Games._
+
+[foundry-discord]: https://discord.com/channels/170995199584108546/670336275496042502
+[trolllord-discord]: https://discord.com/channels/425649158255411211/575032759521771538
