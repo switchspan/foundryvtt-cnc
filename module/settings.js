@@ -14,33 +14,34 @@ export const registerSystemSettings = function () {
    * Register resting variants
    */
   game.settings.register("cnc", "restVariant", {
-    name: "SETTINGS.CncRestN",
+    name: "Rest variant",
     hint: "Register resting variants",
     scope: "world",
     config: true,
     default: "normal",
     type: String,
     choices: {
-      normal: "SETTINGS.CncRestPHB",
-      gritty: "SETTINGS.CncRestGritty",
-      epic: "SETTINGS.CncRestEpic",
+      normal: "Normal",
+      gritty: "Gritty",
+      epic: "Epic",
     },
+    onChange: (value) => console.log(value),
   });
 
   /**
    * Register diagonal movement rule setting
    */
   game.settings.register("cnc", "diagonalMovement", {
-    name: "SETTINGS.CncDiagN",
+    name: "CNC.SettingDiagonalMovementRule",
     hint: "Register diagonal movement rule setting",
     scope: "world",
     config: true,
     default: "555",
     type: String,
     choices: {
-      555: "SETTINGS.CncDiagPHB",
-      5105: "SETTINGS.CncDiagDMG",
-      EUCL: "SETTINGS.CncDiagEuclidean",
+      555: "CNC.DiagPHB",
+      5105: "CNC.DiagDMG",
+      EUCL: "CNC.DiagEuclidean",
     },
     onChange: (rule) => (canvas.grid.diagonalRule = rule),
   });
