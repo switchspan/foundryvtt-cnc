@@ -10,6 +10,7 @@ export const registerSystemSettings = function () {
     default: "",
   });
 
+  //TODO: See if we need resting variants
   /**
    * Register resting variants
    */
@@ -28,6 +29,7 @@ export const registerSystemSettings = function () {
     onChange: (value) => console.log(value),
   });
 
+  //TODO: See if we need diagonal movement rules and
   /**
    * Register diagonal movement rule setting
    */
@@ -39,9 +41,9 @@ export const registerSystemSettings = function () {
     default: "555",
     type: String,
     choices: {
-      555: "CNC.DiagPHB",
-      5105: "CNC.DiagDMG",
-      EUCL: "CNC.DiagEuclidean",
+      555: "D&D 5e 5-5-5",
+      5105: "D&D 3.5 5-10-5",
+      EUCL: "Euclidean",
     },
     onChange: (rule) => (canvas.grid.diagonalRule = rule),
   });
