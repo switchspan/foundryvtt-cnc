@@ -20,7 +20,8 @@
   "main": "cnc.js",
   "scripts": {
     "build": "gulp",
-    "version": "gulp bump && git add -A system.json && git add -A package.json",
+    "preversion": "npm run build",
+    "version": "gulp bump && git add system.json && git add package.json",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
