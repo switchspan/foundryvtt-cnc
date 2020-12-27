@@ -1,6 +1,7 @@
 /** @override */
-export const measureDistances = function(segments, options={}) {
-  if ( !options.gridSpaces ) return BaseGrid.prototype.measureDistances.call(this, segments, options);
+export const measureDistances = function (segments, options = {}) {
+  if (!options.gridSpaces)
+    return BaseGrid.prototype.measureDistances.call(this, segments, options);
 
   // Track the total number of diagonals
   let nDiagonal = 0;
@@ -8,22 +9,22 @@ export const measureDistances = function(segments, options={}) {
   const d = canvas.dimensions;
 
   // Iterate over measured segments
-  return segments.map(s => {
-    let r = s.ray;
+  return segments.map((s) => {
+    const r = s.ray;
 
     // Determine the total distance traveled
-    let nx = Math.abs(Math.ceil(r.dx / d.size));
-    let ny = Math.abs(Math.ceil(r.dy / d.size));
+    const nx = Math.abs(Math.ceil(r.dx / d.size));
+    const ny = Math.abs(Math.ceil(r.dy / d.size));
 
     // Determine the number of straight and diagonal moves
-    let nd = Math.min(nx, ny);
-    let ns = Math.abs(ny - nx);
+    const nd = Math.min(nx, ny);
+    const ns = Math.abs(ny - nx);
     nDiagonal += nd;
 
     // Alternative DMG Movement
     if (rule === "5105") {
-      let nd10 = Math.floor(nDiagonal / 2) - Math.floor((nDiagonal - nd) / 2);
-      let spaces = (nd10 * 2) + (nd - nd10) + ns;
+      const nd10 = Math.floor(nDiagonal / 2) - Math.floor((nDiagonal - nd) / 2);
+      const spaces = nd10 * 2 + (nd - nd10) + ns;
       return spaces * canvas.dimensions.distance;
     }
 
@@ -44,11 +45,15 @@ export const measureDistances = function(segments, options={}) {
  * TODO: This should probably be replaced with a formal Token class extension
  */
 const _TokenGetBarAttribute = Token.prototype.getBarAttribute;
-export const getBarAttribute = function(...args) {
+export const getBarAttribute = function (...args) {
   const data = _TokenGetBarAttribute.bind(this)(...args);
-  if ( data && (data.attribute === "attributes.hp") ) {
-    data.value += parseInt(getProperty(this.actor.data, "data.attributes.hp.temp") || 0);
-    data.max += parseInt(getProperty(this.actor.data, "data.attributes.hp.tempmax") || 0);
+  if (data && data.attribute === "attributes.hp") {
+    data.value += parseInt(
+      getProperty(this.actor.data, "data.attributes.hp.temp") || 0
+    );
+    data.max += parseInt(
+      getProperty(this.actor.data, "data.attributes.hp.tempmax") || 0
+    );
   }
   return data;
 };

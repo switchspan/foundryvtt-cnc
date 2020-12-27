@@ -1,5 +1,4 @@
-export const registerSystemSettings = function() {
-
+export const registerSystemSettings = function () {
   /**
    * Track the system version upon which point a migration was last applied
    */
@@ -8,7 +7,7 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: false,
     type: String,
-    default: ""
+    default: "",
   });
 
   /**
@@ -22,10 +21,10 @@ export const registerSystemSettings = function() {
     default: "normal",
     type: String,
     choices: {
-      "normal": "SETTINGS.CncRestPHB",
-      "gritty": "SETTINGS.CncRestGritty",
-      "epic": "SETTINGS.CncRestEpic",
-    }
+      normal: "SETTINGS.CncRestPHB",
+      gritty: "SETTINGS.CncRestGritty",
+      epic: "SETTINGS.CncRestEpic",
+    },
   });
 
   /**
@@ -39,11 +38,11 @@ export const registerSystemSettings = function() {
     default: "555",
     type: String,
     choices: {
-      "555": "SETTINGS.CncDiagPHB",
-      "5105": "SETTINGS.CncDiagDMG",
-      "EUCL": "SETTINGS.CncDiagEuclidean",
+      555: "SETTINGS.CncDiagPHB",
+      5105: "SETTINGS.CncDiagDMG",
+      EUCL: "SETTINGS.CncDiagEuclidean",
     },
-    onChange: rule => canvas.grid.diagonalRule = rule
+    onChange: (rule) => (canvas.grid.diagonalRule = rule),
   });
 
   /**
@@ -55,7 +54,7 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: true,
     default: false,
-    type: Boolean
+    type: Boolean,
   });
 
   /**
@@ -67,7 +66,7 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: true,
     default: true,
-    type: Boolean
+    type: Boolean,
   });
 
   /**
@@ -92,28 +91,28 @@ export const registerSystemSettings = function() {
     config: true,
     default: false,
     type: Boolean,
-    onChange: s => {
+    onChange: (s) => {
       ui.chat.render();
-    }
+    },
   });
 
   /**
    * Option to allow GMs to restrict polymorphing to GMs only.
    */
-  game.settings.register('cnc', 'allowPolymorphing', {
-    name: 'SETTINGS.CncAllowPolymorphingN',
-    hint: 'SETTINGS.CncAllowPolymorphingL',
-    scope: 'world',
+  game.settings.register("cnc", "allowPolymorphing", {
+    name: "SETTINGS.CncAllowPolymorphingN",
+    hint: "SETTINGS.CncAllowPolymorphingL",
+    scope: "world",
     config: true,
     default: false,
-    type: Boolean
+    type: Boolean,
   });
 
   /**
    * Remember last-used polymorph settings.
    */
-  game.settings.register('cnc', 'polymorphSettings', {
-    scope: 'client',
+  game.settings.register("cnc", "polymorphSettings", {
+    scope: "client",
     default: {
       keepPhysical: false,
       keepMental: false,
@@ -127,7 +126,7 @@ export const registerSystemSettings = function() {
       keepItems: false,
       keepBio: false,
       keepVision: true,
-      transformTokens: true
-    }
+      transformTokens: true,
+    },
   });
 };

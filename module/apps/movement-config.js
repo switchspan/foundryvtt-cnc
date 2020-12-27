@@ -3,36 +3,35 @@
  * @implements {BaseEntitySheet}
  */
 export default class ActorMovementConfig extends BaseEntitySheet {
-
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
-      classes: ["cnc"],
-      template: "systems/cnc/templates/apps/movement-config.html",
+  static get defaultOptions () {
+    return mergeObject(super.defaultOptions, {
+      classes: ['cnc'],
+      template: 'systems/cnc/templates/apps/movement-config.html',
       width: 300,
-      height: "auto"
-    });
+      height: 'auto'
+    })
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  get title() {
-    return `${game.i18n.localize("CNC.MovementConfig")}: ${this.entity.name}`;
+  get title () {
+    return `${game.i18n.localize('CNC.MovementConfig')}: ${this.entity.name}`
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  getData(options) {
+  getData (options) {
     const data = {
       movement: duplicate(this.entity._data.data.attributes.movement),
       units: CONFIG.CNC.movementUnits
     }
-    for ( let [k, v] of Object.entries(data.movement) ) {
-      if ( ["units", "hover"].includes(k) ) continue;
-      data.movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : 0;
+    for (const [k, v] of Object.entries(data.movement)) {
+      if (['units', 'hover'].includes(k)) continue
+      data.movement[k] = Number.isNumeric(v) ? v.toNearest(0.1) : 0
     }
-    return data;
+    return data
   }
 }

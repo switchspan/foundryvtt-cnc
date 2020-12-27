@@ -1,5 +1,8 @@
 import TraitSelector from "../apps/trait-selector.js";
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../effects.js";
+import {
+  onManageActiveEffect,
+  prepareActiveEffectCategories,
+} from "../effects.js";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types
@@ -10,8 +13,8 @@ export default class ItemSheet5e extends ItemSheet {
     super(...args);
 
     // Expand the default size of the class sheet
-    if ( this.object.data.type === "class" ) {
-      this.options.width = this.position.width =  600;
+    if (this.object.data.type === "class") {
+      this.options.width = this.position.width = 600;
       this.options.height = this.position.height = 680;
     }
   }
@@ -19,14 +22,20 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
       width: 560,
       height: 400,
       classes: ["cnc", "sheet", "item"],
       resizable: true,
       scrollY: [".tab.details"],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [
+        {
+          navSelector: ".tabs",
+          contentSelector: ".sheet-body",
+          initial: "description",
+        },
+      ],
     });
   }
 
@@ -47,7 +56,9 @@ export default class ItemSheet5e extends ItemSheet {
     data.config = CONFIG.CNC;
 
     // Item Type, Status, and Details
-    data.itemType = game.i18n.localize(`ITEM.Type${data.item.type.titleCase()}`);
+    data.itemType = game.i18n.localize(
+      `ITEM.Type${data.item.type.titleCase()}`
+    );
     data.itemStatus = this._getItemStatus(data.item);
     data.itemProperties = this._getItemProperties(data.item);
     data.isPhysical = data.item.data.hasOwnProperty("quantity");
@@ -62,10 +73,11 @@ export default class ItemSheet5e extends ItemSheet {
     data.isLine = ["line", "wall"].includes(data.item.data.target?.type);
 
     // Original maximum uses formula
-    if ( this.item._data.data?.uses?.max ) data.data.uses.max = this.item._data.data.uses.max;
+    if (this.item._data.data?.uses?.max)
+      data.data.uses.max = this.item._data.data.uses.max;
 
     // Vehicles
-    data.isCrewed = data.item.data.activation?.type === 'crew';
+    data.isCrewed = data.item.data.activation?.type === "crew";
     data.isMountable = this._isItemMountable(data.item);
 
     // Prepare Active Effects
@@ -83,23 +95,28 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _getItemConsumptionTargets(item) {
     const consume = item.data.consume || {};
-    if ( !consume.type ) return [];
+    if (!consume.type) return [];
     const actor = this.item.actor;
-    if ( !actor ) return {};
+    if (!actor) return {};
 
     // Ammunition
-    if ( consume.type === "ammo" ) {
-      return actor.itemTypes.consumable.reduce((ammo, i) =>  {
-        if ( i.data.data.consumableType === "ammo" ) {
-          ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
-        }
-        return ammo;
-      }, {[item._id]: `${item.name} (${item.data.quantity})`});
+    if (consume.type === "ammo") {
+      return actor.itemTypes.consumable.reduce(
+        (ammo, i) => {
+          if (i.data.data.consumableType === "ammo") {
+            ammo[i.id] = `${i.name} (${i.data.data.quantity})`;
+          }
+          return ammo;
+        },
+        { [item._id]: `${item.name} (${item.data.quantity})` }
+      );
     }
 
     // Attributes
-    else if ( consume.type === "attribute" ) {
-      const attributes = Object.values(CombatTrackerConfig.prototype.getAttributeChoices())[0]; // Bit of a hack
+    else if (consume.type === "attribute") {
+      const attributes = Object.values(
+        CombatTrackerConfig.prototype.getAttributeChoices()
+      )[0]; // Bit of a hack
       return attributes.reduce((obj, a) => {
         obj[a] = a;
         return obj;
@@ -107,9 +124,12 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Materials
-    else if ( consume.type === "material" ) {
+    else if (consume.type === "material") {
       return actor.items.reduce((obj, i) => {
-        if ( ["consumable", "loot"].includes(i.data.type) && !i.data.data.activation ) {
+        if (
+          ["consumable", "loot"].includes(i.data.type) &&
+          !i.data.data.activation
+        ) {
           obj[i.id] = `${i.name} (${i.data.data.quantity})`;
         }
         return obj;
@@ -117,25 +137,30 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // Charges
-    else if ( consume.type === "charges" ) {
+    else if (consume.type === "charges") {
       return actor.items.reduce((obj, i) => {
-
         // Limited-use items
         const uses = i.data.data.uses || {};
-        if ( uses.per && uses.max ) {
-          const label = uses.per === "charges" ?
-            ` (${game.i18n.format("CNC.AbilityUseChargesLabel", {value: uses.value})})` :
-            ` (${game.i18n.format("CNC.AbilityUseConsumableLabel", {max: uses.max, per: uses.per})})`;
+        if (uses.per && uses.max) {
+          const label =
+            uses.per === "charges"
+              ? ` (${game.i18n.format("CNC.AbilityUseChargesLabel", {
+                  value: uses.value,
+                })})`
+              : ` (${game.i18n.format("CNC.AbilityUseConsumableLabel", {
+                  max: uses.max,
+                  per: uses.per,
+                })})`;
           obj[i.id] = i.name + label;
         }
 
         // Recharging items
         const recharge = i.data.data.recharge || {};
-        if ( recharge.value ) obj[i.id] = `${i.name} (${game.i18n.format("CNC.Recharge")})`;
+        if (recharge.value)
+          obj[i.id] = `${i.name} (${game.i18n.format("CNC.Recharge")})`;
         return obj;
-      }, {})
-    }
-    else return {};
+      }, {});
+    } else return {};
   }
 
   /* -------------------------------------------- */
@@ -146,14 +171,16 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) {
+    if (item.type === "spell") {
       return CONFIG.CNC.spellPreparationModes[item.data.preparation];
-    }
-    else if ( ["weapon", "equipment"].includes(item.type) ) {
-      return game.i18n.localize(item.data.equipped ? "CNC.Equipped" : "CNC.Unequipped");
-    }
-    else if ( item.type === "tool" ) {
-      return game.i18n.localize(item.data.proficient ? "CNC.Proficient" : "CNC.NotProficient");
+    } else if (["weapon", "equipment"].includes(item.type)) {
+      return game.i18n.localize(
+        item.data.equipped ? "CNC.Equipped" : "CNC.Unequipped"
+      );
+    } else if (item.type === "tool") {
+      return game.i18n.localize(
+        item.data.proficient ? "CNC.Proficient" : "CNC.NotProficient"
+      );
     }
   }
 
@@ -168,45 +195,47 @@ export default class ItemSheet5e extends ItemSheet {
     const props = [];
     const labels = this.item.labels;
 
-    if ( item.type === "weapon" ) {
-      props.push(...Object.entries(item.data.properties)
-        .filter(e => e[1] === true)
-        .map(e => CONFIG.CNC.weaponProperties[e[0]]));
-    }
-
-    else if ( item.type === "spell" ) {
+    if (item.type === "weapon") {
+      props.push(
+        ...Object.entries(item.data.properties)
+          .filter((e) => e[1] === true)
+          .map((e) => CONFIG.CNC.weaponProperties[e[0]])
+      );
+    } else if (item.type === "spell") {
       props.push(
         labels.components,
         labels.materials,
-        item.data.components.concentration ? game.i18n.localize("CNC.Concentration") : null,
+        item.data.components.concentration
+          ? game.i18n.localize("CNC.Concentration")
+          : null,
         item.data.components.ritual ? game.i18n.localize("CNC.Ritual") : null
-      )
-    }
-
-    else if ( item.type === "equipment" ) {
+      );
+    } else if (item.type === "equipment") {
       props.push(CONFIG.CNC.equipmentTypes[item.data.armor.type]);
       props.push(labels.armor);
-    }
-
-    else if ( item.type === "feat" ) {
+    } else if (item.type === "feat") {
       props.push(labels.featType);
     }
 
     // Action type
-    if ( item.data.actionType ) {
+    if (item.data.actionType) {
       props.push(CONFIG.CNC.itemActionTypes[item.data.actionType]);
     }
 
     // Action usage
-    if ( (item.type !== "weapon") && item.data.activation && !isObjectEmpty(item.data.activation) ) {
+    if (
+      item.type !== "weapon" &&
+      item.data.activation &&
+      !isObjectEmpty(item.data.activation)
+    ) {
       props.push(
         labels.activation,
         labels.range,
         labels.target,
         labels.duration
-      )
+      );
     }
-    return props.filter(p => !!p);
+    return props.filter((p) => !!p);
   }
 
   /* -------------------------------------------- */
@@ -221,36 +250,43 @@ export default class ItemSheet5e extends ItemSheet {
    */
   _isItemMountable(item) {
     const data = item.data;
-    return (item.type === 'weapon' && data.weaponType === 'siege')
-      || (item.type === 'equipment' && data.armor.type === 'vehicle');
+    return (
+      (item.type === "weapon" && data.weaponType === "siege") ||
+      (item.type === "equipment" && data.armor.type === "vehicle")
+    );
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  setPosition(position={}) {
-    if ( !(this._minimized  || position.height) ) {
-      position.height = (this._tabs[0].active === "details") ? "auto" : this.options.height;
+  setPosition(position = {}) {
+    if (!(this._minimized || position.height)) {
+      position.height =
+        this._tabs[0].active === "details" ? "auto" : this.options.height;
     }
     return super.setPosition(position);
   }
 
   /* -------------------------------------------- */
   /*  Form Submission                             */
-	/* -------------------------------------------- */
+
+  /* -------------------------------------------- */
 
   /** @override */
-  _getSubmitData(updateData={}) {
-
+  _getSubmitData(updateData = {}) {
     // Create the expanded update data object
-    const fd = new FormDataExtended(this.form, {editors: this.editors});
+    const fd = new FormDataExtended(this.form, { editors: this.editors });
     let data = fd.toObject();
-    if ( updateData ) data = mergeObject(data, updateData);
+    if (updateData) data = mergeObject(data, updateData);
     else data = expandObject(data);
 
     // Handle Damage array
     const damage = data.data?.damage;
-    if ( damage ) damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+    if (damage)
+      damage.parts = Object.values(damage?.parts || {}).map((d) => [
+        d[0] || "",
+        d[1] || "",
+      ]);
 
     // Return the flattened submission data
     return flattenObject(data);
@@ -261,12 +297,17 @@ export default class ItemSheet5e extends ItemSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
-    if ( this.isEditable ) {
+    if (this.isEditable) {
       html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
-      html.find(".effect-control").click(ev => {
-        if ( this.item.isOwned ) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.")
-        onManageActiveEffect(ev, this.item)
+      html
+        .find(".trait-selector.class-skills")
+        .click(this._onConfigureClassSkills.bind(this));
+      html.find(".effect-control").click((ev) => {
+        if (this.item.isOwned)
+          return ui.notifications.warn(
+            "Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update."
+          );
+        onManageActiveEffect(ev, this.item);
       });
     }
   }
@@ -284,19 +325,21 @@ export default class ItemSheet5e extends ItemSheet {
     const a = event.currentTarget;
 
     // Add new damage component
-    if ( a.classList.contains("add-damage") ) {
-      await this._onSubmit(event);  // Submit any unsaved changes
+    if (a.classList.contains("add-damage")) {
+      await this._onSubmit(event); // Submit any unsaved changes
       const damage = this.item.data.data.damage;
-      return this.item.update({"data.damage.parts": damage.parts.concat([["", ""]])});
+      return this.item.update({
+        "data.damage.parts": damage.parts.concat([["", ""]]),
+      });
     }
 
     // Remove a damage component
-    if ( a.classList.contains("delete-damage") ) {
-      await this._onSubmit(event);  // Submit any unsaved changes
+    if (a.classList.contains("delete-damage")) {
+      await this._onSubmit(event); // Submit any unsaved changes
       const li = a.closest(".damage-part");
       const damage = duplicate(this.item.data.data.damage);
       damage.parts.splice(Number(li.dataset.damagePart), 1);
-      return this.item.update({"data.damage.parts": damage.parts});
+      return this.item.update({ "data.damage.parts": damage.parts });
     }
   }
 
@@ -310,7 +353,10 @@ export default class ItemSheet5e extends ItemSheet {
   _onConfigureClassSkills(event) {
     event.preventDefault();
     const skills = this.item.data.data.skills;
-    const choices = skills.choices && skills.choices.length ? skills.choices : Object.keys(CONFIG.CNC.skills);
+    const choices =
+      skills.choices && skills.choices.length
+        ? skills.choices
+        : Object.keys(CONFIG.CNC.skills);
     const a = event.currentTarget;
     const label = a.parentElement;
 
@@ -319,19 +365,19 @@ export default class ItemSheet5e extends ItemSheet {
       name: a.dataset.target,
       title: label.innerText,
       choices: Object.entries(CONFIG.CNC.skills).reduce((obj, e) => {
-        if ( choices.includes(e[0] ) ) obj[e[0]] = e[1];
+        if (choices.includes(e[0])) obj[e[0]] = e[1];
         return obj;
       }, {}),
       minimum: skills.number,
-      maximum: skills.number
-    }).render(true)
+      maximum: skills.number,
+    }).render(true);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onSubmit(...args) {
-    if ( this._tabs[0].active === "details" ) this.position.height = "auto";
+    if (this._tabs[0].active === "details") this.position.height = "auto";
     await super._onSubmit(...args);
   }
 }

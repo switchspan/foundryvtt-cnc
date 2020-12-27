@@ -29,7 +29,7 @@ import ItemSheetCnc from "./module/item/sheet.js";
 import ShortRestDialog from "./module/apps/short-rest.js";
 import TraitSelector from "./module/apps/trait-selector.js";
 import ActorMovementConfig from "./module/apps/movement-config.js";
-import ActorSensesConfig from "./module/apps/senses-config.js";
+//import ActorSensesConfig from './module/apps/senses-config.js'
 
 // Import Helpers
 import * as chat from "./module/chat.js";
@@ -41,8 +41,10 @@ import * as migrations from "./module/migration.js";
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
-Hooks.once("init", function() {
-  console.log(`CNC | Initializing the Castles & Crusades Game System\n${CNC.ASCII}`);
+Hooks.once("init", function () {
+  console.log(
+    `CNC | Initializing the Castles & Crusades Game System\n${CNC.ASCII}`
+  );
 
   // Create a namespace within the game global
   game.CNC = {
@@ -55,10 +57,10 @@ Hooks.once("init", function() {
       ItemSheetCnc,
       ShortRestDialog,
       TraitSelector,
-      ActorMovementConfig
+      ActorMovementConfig,
     },
     canvas: {
-      AbilityTemplate
+      AbilityTemplate,
     },
     config: CNC,
     dice: dice,
@@ -68,7 +70,7 @@ Hooks.once("init", function() {
     },
     macros: macros,
     migrations: migrations,
-    rollItemMacro: macros.rollItemMacro
+    rollItemMacro: macros.rollItemMacro,
   };
 
   // Record Configuration Values
@@ -81,7 +83,8 @@ Hooks.once("init", function() {
   registerSystemSettings();
 
   // Patch Core Functions
-  CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
+  CONFIG.Combat.initiative.formula =
+    "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
 
   // Register sheet application classes
@@ -89,28 +92,27 @@ Hooks.once("init", function() {
   Actors.registerSheet("cnc", ActorSheetCncCharacter, {
     types: ["character"],
     makeDefault: true,
-    label: "CNC.SheetClassCharacter"
+    label: "CNC.SheetClassCharacter",
   });
   Actors.registerSheet("cnc", ActorSheetCncNPC, {
     types: ["npc"],
     makeDefault: true,
-    label: "CNC.SheetClassNPC"
+    label: "CNC.SheetClassNPC",
   });
-  Actors.registerSheet('cnc', ActorSheetCncVehicle, {
-    types: ['vehicle'],
+  Actors.registerSheet("cnc", ActorSheetCncVehicle, {
+    types: ["vehicle"],
     makeDefault: true,
-    label: "CNC.SheetClassVehicle"
+    label: "CNC.SheetClassVehicle",
   });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("cnc", ItemSheetCnc, {
     makeDefault: true,
-    label: "CNC.SheetClassItem"
+    label: "CNC.SheetClassItem",
   });
 
   // Preload Handlebars Templates
   preloadHandlebarsTemplates();
 });
-
 
 /* -------------------------------------------- */
 /*  Foundry VTT Setup                           */
@@ -119,30 +121,69 @@ Hooks.once("init", function() {
 /**
  * This function runs after game data has been requested and loaded from the servers, so entities exist
  */
-Hooks.once("setup", function() {
-
+Hooks.once("setup", function () {
   // Localize CONFIG objects once up-front
   const toLocalize = [
-    "abilities", "abilityAbbreviations", "abilityActivationTypes", "abilityConsumptionTypes", "actorSizes", "alignments",
-    "armorProficiencies", "conditionTypes", "consumableTypes", "cover", "currencies", "damageResistanceTypes",
-    "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "languages",
-    "limitedUsePeriods", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "senses", "skills",
-    "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools", "targetTypes",
-    "timePeriods", "toolProficiencies", "weaponProficiencies", "weaponProperties", "weaponTypes"
+    "abilities",
+    "abilityAbbreviations",
+    "abilityActivationTypes",
+    "abilityConsumptionTypes",
+    "actorSizes",
+    "alignments",
+    "armorProficiencies",
+    "conditionTypes",
+    "consumableTypes",
+    "cover",
+    "currencies",
+    "damageResistanceTypes",
+    "damageTypes",
+    "distanceUnits",
+    "equipmentTypes",
+    "healingTypes",
+    "itemActionTypes",
+    "languages",
+    "limitedUsePeriods",
+    "movementTypes",
+    "movementUnits",
+    "polymorphSettings",
+    "proficiencyLevels",
+    "senses",
+    "skills",
+    "spellComponents",
+    "spellLevels",
+    "spellPreparationModes",
+    "spellScalingModes",
+    "spellSchools",
+    "targetTypes",
+    "timePeriods",
+    "toolProficiencies",
+    "weaponProficiencies",
+    "weaponProperties",
+    "weaponTypes",
   ];
 
   // Exclude some from sorting where the default order matters
   const noSort = [
-    "abilities", "alignments", "currencies", "distanceUnits", "movementUnits", "itemActionTypes", "proficiencyLevels",
-    "limitedUsePeriods", "spellComponents", "spellLevels", "spellPreparationModes", "weaponTypes"
+    "abilities",
+    "alignments",
+    "currencies",
+    "distanceUnits",
+    "movementUnits",
+    "itemActionTypes",
+    "proficiencyLevels",
+    "limitedUsePeriods",
+    "spellComponents",
+    "spellLevels",
+    "spellPreparationModes",
+    "weaponTypes",
   ];
 
   // Localize and sort CONFIG objects
-  for ( let o of toLocalize ) {
-    const localized = Object.entries(CONFIG.CNC[o]).map(e => {
+  for (const o of toLocalize) {
+    const localized = Object.entries(CONFIG.CNC[o]).map((e) => {
       return [e[0], game.i18n.localize(e[1])];
     });
-    if ( !noSort.includes(o) ) localized.sort((a, b) => a[1].localeCompare(b[1]));
+    if (!noSort.includes(o)) localized.sort((a, b) => a[1].localeCompare(b[1]));
     CONFIG.CNC[o] = localized.reduce((obj, e) => {
       obj[e[0]] = e[1];
       return obj;
@@ -155,23 +196,27 @@ Hooks.once("setup", function() {
 /**
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
-Hooks.once("ready", function() {
-
+Hooks.once("ready", function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => macros.create5eMacro(data, slot));
 
   // Determine whether a system migration is required and feasible
-  if ( !game.user.isGM ) return;
+  if (!game.user.isGM) return;
   const currentVersion = game.settings.get("cnc", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = "1.2.1";
-  const COMPATIBLE_MIGRATION_VERSION = 0.80;
-  const needsMigration = currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
-  if ( !needsMigration ) return;
+  const COMPATIBLE_MIGRATION_VERSION = 0.8;
+  const needsMigration =
+    currentVersion && isNewerVersion(NEEDS_MIGRATION_VERSION, currentVersion);
+  if (!needsMigration) return;
 
   // Perform the migration
-  if ( currentVersion && isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion) ) {
-    const warning = `Your CNC system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`;
-    ui.notifications.error(warning, {permanent: true});
+  if (
+    currentVersion &&
+    isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion)
+  ) {
+    const warning =
+      "Your CNC system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.";
+    ui.notifications.error(warning, { permanent: true });
   }
   migrations.migrateWorld();
 });
@@ -180,8 +225,7 @@ Hooks.once("ready", function() {
 /*  Canvas Initialization                       */
 /* -------------------------------------------- */
 
-Hooks.on("canvasInit", function() {
-
+Hooks.on("canvasInit", function () {
   // Extend Diagonal Measurement
   canvas.grid.diagonalRule = game.settings.get("cnc", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
@@ -190,13 +234,11 @@ Hooks.on("canvasInit", function() {
   Token.prototype.getBarAttribute = getBarAttribute;
 });
 
-
 /* -------------------------------------------- */
 /*  Other Hooks                                 */
 /* -------------------------------------------- */
 
 Hooks.on("renderChatMessage", (app, html, data) => {
-
   // Display action buttons
   chat.displayChatActionButtons(app, html, data);
 
@@ -204,14 +246,15 @@ Hooks.on("renderChatMessage", (app, html, data) => {
   chat.highlightCriticalSuccessFailure(app, html, data);
 
   // Optionally collapse the content
-  if (game.settings.get("cnc", "autoCollapseItemCards")) html.find(".card-content").hide();
+  if (game.settings.get("cnc", "autoCollapseItemCards"))
+    html.find(".card-content").hide();
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => ItemCnc.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => ItemCnc.chatListeners(html));
-Hooks.on('getActorDirectoryEntryContext', ActorCnc.addDirectoryContextOptions);
+Hooks.on("getActorDirectoryEntryContext", ActorCnc.addDirectoryContextOptions);
 
 // TODO I should remove this
-Handlebars.registerHelper('getProperty', function (data, property) {
+Handlebars.registerHelper("getProperty", function (data, property) {
   return getProperty(data, property);
 });

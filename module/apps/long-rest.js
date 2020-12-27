@@ -3,30 +3,30 @@
  * @extends {Dialog}
  */
 export default class LongRestDialog extends Dialog {
-  constructor(actor, dialogData = {}, options = {}) {
-    super(dialogData, options);
-    this.actor = actor;
+  constructor (actor, dialogData = {}, options = {}) {
+    super(dialogData, options)
+    this.actor = actor
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  static get defaultOptions() {
+  static get defaultOptions () {
     return mergeObject(super.defaultOptions, {
-      template: "systems/cnc/templates/apps/long-rest.html",
-      classes: ["cnc", "dialog"]
-    });
+      template: 'systems/cnc/templates/apps/long-rest.html',
+      classes: ['cnc', 'dialog']
+    })
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
-    const variant = game.settings.get("cnc", "restVariant");
-    data.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
-    data.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
-    return data;
+  getData () {
+    const data = super.getData()
+    const variant = game.settings.get('cnc', 'restVariant')
+    data.promptNewDay = variant !== 'gritty' // It's always a new day when resting 1 week
+    data.newDay = variant === 'normal' // It's probably a new day when resting normally (8 hours)
+    return data
   }
 
   /* -------------------------------------------- */
@@ -37,33 +37,30 @@ export default class LongRestDialog extends Dialog {
    * @param {Actor5e} actor
    * @return {Promise}
    */
-  static async longRestDialog({ actor } = {}) {
+  static async longRestDialog ({ actor } = {}) {
     return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
-        title: "Long Rest",
+        title: 'Long Rest',
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
-            label: "Rest",
+            label: 'Rest',
             callback: html => {
-              let newDay = false;
-              if (game.settings.get("cnc", "restVariant") === "normal")
-                newDay = html.find('input[name="newDay"]')[0].checked;
-              else if(game.settings.get("cnc", "restVariant") === "gritty")
-                newDay = true;
-              resolve(newDay);
+              let newDay = false
+              if (game.settings.get('cnc', 'restVariant') === 'normal') { newDay = html.find('input[name="newDay"]')[0].checked } else if (game.settings.get('cnc', 'restVariant') === 'gritty') { newDay = true }
+              resolve(newDay)
             }
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
-            label: "Cancel",
+            label: 'Cancel',
             callback: reject
           }
         },
         default: 'rest',
         close: reject
-      });
-      dlg.render(true);
-    });
+      })
+      dlg.render(true)
+    })
   }
 }

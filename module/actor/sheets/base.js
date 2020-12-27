@@ -3,8 +3,11 @@ import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import ActorMovementConfig from "../../apps/movement-config.js";
 import ActorSensesConfig from "../../apps/senses-config.js";
-import {CNC} from '../../config.js';
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../../effects.js";
+import { CNC } from "../../config.js";
+import {
+  onManageActiveEffect,
+  prepareActiveEffectCategories,
+} from "../../effects.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -23,7 +26,7 @@ export default class ActorSheet5e extends ActorSheet {
       inventory: new Set(),
       spellbook: new Set(),
       features: new Set(),
-      effects: new Set()
+      effects: new Set(),
     };
   }
 
@@ -36,9 +39,15 @@ export default class ActorSheet5e extends ActorSheet {
         ".inventory .inventory-list",
         ".features .inventory-list",
         ".spellbook .inventory-list",
-        ".effects .inventory-list"
+        ".effects .inventory-list",
       ],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
+      tabs: [
+        {
+          navSelector: ".tabs",
+          contentSelector: ".sheet-body",
+          initial: "description",
+        },
+      ],
     });
   }
 
@@ -46,7 +55,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/cnc/templates/actors/limited-sheet.html";
+    if (!game.user.isGM && this.actor.limited)
+      return "systems/cnc/templates/actors/limited-sheet.html";
     return `systems/cnc/templates/actors/${this.actor.data.type}-sheet.html`;
   }
 
@@ -54,9 +64,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   getData() {
-
     // Basic data
-    let isOwner = this.entity.owner;
+    const isOwner = this.entity.owner;
     const data = {
       owner: isOwner,
       limited: this.entity.limited,
@@ -65,13 +74,13 @@ export default class ActorSheet5e extends ActorSheet {
       cssClass: isOwner ? "editable" : "locked",
       isCharacter: this.entity.data.type === "character",
       isNPC: this.entity.data.type === "npc",
-      isVehicle: this.entity.data.type === 'vehicle',
+      isVehicle: this.entity.data.type === "vehicle",
       config: CONFIG.CNC,
     };
 
     // The Actor and its Items
     data.actor = duplicate(this.actor.data);
-    data.items = this.actor.items.map(i => {
+    data.items = this.actor.items.map((i) => {
       i.data.labels = i.labels;
       return i.data;
     });
@@ -81,7 +90,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.filters = this._filters;
 
     // Ability Scores
-    for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
+    for (const [a, abl] of Object.entries(data.actor.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
       abl.hover = CONFIG.CNC.proficiencyLevels[abl.proficient];
       abl.label = CONFIG.CNC.abilities[a];
@@ -89,7 +98,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Skills
     if (data.actor.data.skills) {
-      for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
+      for (const [s, skl] of Object.entries(data.actor.data.skills)) {
         skl.ability = CONFIG.CNC.abilityAbbreviations[skl.ability];
         skl.icon = this._getProficiencyIcon(skl.value);
         skl.hover = CONFIG.CNC.proficiencyLevels[skl.value];
@@ -113,7 +122,7 @@ export default class ActorSheet5e extends ActorSheet {
     data.effects = prepareActiveEffectCategories(this.entity.effects);
 
     // Return data to the sheet
-    return data
+    return data;
   }
 
   /* -------------------------------------------- */
@@ -125,38 +134,56 @@ export default class ActorSheet5e extends ActorSheet {
    * @returns {{primary: string, special: string}}
    * @private
    */
-  _getMovementSpeed(actorData, largestPrimary=false) {
+  _getMovementSpeed(actorData, largestPrimary = false) {
     const movement = actorData.data.attributes.movement || {};
 
     // Prepare an array of available movement speeds
     let speeds = [
-      [movement.burrow, `${game.i18n.localize("CNC.MovementBurrow")} ${movement.burrow}`],
-      [movement.climb, `${game.i18n.localize("CNC.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("CNC.MovementFly")} ${movement.fly}` + (movement.hover ? ` (${game.i18n.localize("CNC.MovementHover")})` : "")],
-      [movement.swim, `${game.i18n.localize("CNC.MovementSwim")} ${movement.swim}`]
-    ]
-    if ( largestPrimary ) {
-      speeds.push([movement.walk, `${game.i18n.localize("CNC.MovementWalk")} ${movement.walk}`]);
+      [
+        movement.burrow,
+        `${game.i18n.localize("CNC.MovementBurrow")} ${movement.burrow}`,
+      ],
+      [
+        movement.climb,
+        `${game.i18n.localize("CNC.MovementClimb")} ${movement.climb}`,
+      ],
+      [
+        movement.fly,
+        `${game.i18n.localize("CNC.MovementFly")} ${movement.fly}` +
+          (movement.hover
+            ? ` (${game.i18n.localize("CNC.MovementHover")})`
+            : ""),
+      ],
+      [
+        movement.swim,
+        `${game.i18n.localize("CNC.MovementSwim")} ${movement.swim}`,
+      ],
+    ];
+    if (largestPrimary) {
+      speeds.push([
+        movement.walk,
+        `${game.i18n.localize("CNC.MovementWalk")} ${movement.walk}`,
+      ]);
     }
 
     // Filter and sort speeds on their values
-    speeds = speeds.filter(s => !!s[0]).sort((a, b) => b[0] - a[0]);
+    speeds = speeds.filter((s) => !!s[0]).sort((a, b) => b[0] - a[0]);
 
     // Case 1: Largest as primary
-    if ( largestPrimary ) {
-      let primary = speeds.shift();
+    if (largestPrimary) {
+      const primary = speeds.shift();
       return {
         primary: primary.length ? primary[1] : `0 ${movement.units}`,
-        special: speeds.join(", ")
-      }
+        special: speeds.join(", "),
+      };
     }
 
     // Case 2: Walk as primary
     else {
       return {
         primary: `${movement.walk || 0} ${movement.units}`,
-        special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
-      }
+        special: speeds.length ? speeds.map((s) => s[1]).join(", ") : "",
+      };
     }
   }
 
@@ -165,12 +192,12 @@ export default class ActorSheet5e extends ActorSheet {
   _getSenses(actorData) {
     const senses = actorData.data.attributes.senses || {};
     const tags = {};
-    for ( let [k, label] of Object.entries(CONFIG.CNC.senses) ) {
-      const v = senses[k] ?? 0
-      if ( v === 0 ) continue;
+    for (const [k, label] of Object.entries(CONFIG.CNC.senses)) {
+      const v = senses[k] ?? 0;
+      if (v === 0) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units}`;
     }
-    if ( !!senses.special ) tags["special"] = senses.special;
+    if (senses.special) tags.special = senses.special;
     return tags;
   }
 
@@ -183,20 +210,20 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _prepareTraits(traits) {
     const map = {
-      "dr": CONFIG.CNC.damageResistanceTypes,
-      "di": CONFIG.CNC.damageResistanceTypes,
-      "dv": CONFIG.CNC.damageResistanceTypes,
-      "ci": CONFIG.CNC.conditionTypes,
-      "languages": CONFIG.CNC.languages,
-      "armorProf": CONFIG.CNC.armorProficiencies,
-      "weaponProf": CONFIG.CNC.weaponProficiencies,
-      "toolProf": CONFIG.CNC.toolProficiencies
+      dr: CONFIG.CNC.damageResistanceTypes,
+      di: CONFIG.CNC.damageResistanceTypes,
+      dv: CONFIG.CNC.damageResistanceTypes,
+      ci: CONFIG.CNC.conditionTypes,
+      languages: CONFIG.CNC.languages,
+      armorProf: CONFIG.CNC.armorProficiencies,
+      weaponProf: CONFIG.CNC.weaponProficiencies,
+      toolProf: CONFIG.CNC.toolProficiencies,
     };
-    for ( let [t, choices] of Object.entries(map) ) {
+    for (const [t, choices] of Object.entries(map)) {
       const trait = traits[t];
-      if ( !trait ) continue;
+      if (!trait) continue;
       let values = [];
-      if ( trait.value ) {
+      if (trait.value) {
         values = trait.value instanceof Array ? trait.value : [trait.value];
       }
       trait.selected = values.reduce((obj, t) => {
@@ -205,8 +232,10 @@ export default class ActorSheet5e extends ActorSheet {
       }, {});
 
       // Add custom entry
-      if ( trait.custom ) {
-        trait.custom.split(";").forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
+      if (trait.custom) {
+        trait.custom
+          .split(";")
+          .forEach((c, i) => (trait.selected[`custom${i + 1}`] = c.trim()));
       }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
@@ -227,45 +256,54 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Define some mappings
     const sections = {
-      "atwill": -20,
-      "innate": -10,
-      "pact": 0.5
+      atwill: -20,
+      innate: -10,
+      pact: 0.5,
     };
 
     // Label spell slot uses headers
     const useLabels = {
       "-20": "-",
       "-10": "-",
-      "0": "&infin;"
+      0: "&infin;",
     };
 
     // Format a spellbook entry for a certain indexed level
-    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
+    const registerSection = (
+      sl,
+      i,
+      label,
+      { prepMode = "prepared", value, max, override } = {}
+    ) => {
       spellbook[i] = {
         order: i,
         label: label,
         usesSlots: i > 0,
         canCreate: owner,
-        canPrepare: (data.actor.type === "character") && (i >= 1),
+        canPrepare: data.actor.type === "character" && i >= 1,
         spells: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
-        dataset: {"type": "spell", "level": prepMode in sections ? 1 : i, "preparation.mode": prepMode},
-        prop: sl
+        dataset: {
+          type: "spell",
+          level: prepMode in sections ? 1 : i,
+          "preparation.mode": prepMode,
+        },
+        prop: sl,
       };
     };
 
     // Determine the maximum spell level which has a slot
     const maxLevel = Array.fromRange(10).reduce((max, i) => {
-      if ( i === 0 ) return max;
+      if (i === 0) return max;
       const level = levels[`spell${i}`];
-      if ( (level.max || level.override ) && ( i > max ) ) max = i;
+      if ((level.max || level.override) && i > max) max = i;
       return max;
     }, 0);
 
     // Level-based spellcasters have cantrips and leveled slots
-    if ( maxLevel > 0 ) {
+    if (maxLevel > 0) {
       registerSection("spell0", 0, CONFIG.CNC.spellLevels[0]);
       for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `spell${lvl}`;
@@ -274,42 +312,45 @@ export default class ActorSheet5e extends ActorSheet {
     }
 
     // Pact magic users have cantrips and a pact magic section
-    if ( levels.pact && levels.pact.max ) {
-      if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.CNC.spellLevels[0]);
+    if (levels.pact && levels.pact.max) {
+      if (!spellbook["0"])
+        registerSection("spell0", 0, CONFIG.CNC.spellLevels[0]);
       const l = levels.pact;
       const config = CONFIG.CNC.spellPreparationModes.pact;
       registerSection("pact", sections.pact, config, {
         prepMode: "pact",
         value: l.value,
         max: l.max,
-        override: l.override
+        override: l.override,
       });
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
-    spells.forEach(spell => {
+    spells.forEach((spell) => {
       const mode = spell.data.preparation.mode || "prepared";
       let s = spell.data.level || 0;
       const sl = `spell${s}`;
 
       // Specialized spellcasting modes (if they exist)
-      if ( mode in sections ) {
+      if (mode in sections) {
         s = sections[mode];
-        if ( !spellbook[s] ){
+        if (!spellbook[s]) {
           const l = levels[mode] || {};
           const config = CONFIG.CNC.spellPreparationModes[mode];
           registerSection(mode, s, config, {
             prepMode: mode,
             value: l.value,
             max: l.max,
-            override: l.override
+            override: l.override,
           });
         }
       }
 
       // Sections for higher-level spells which the caster "should not" have, but spell items exist for
-      else if ( !spellbook[s] ) {
-        registerSection(sl, s, CONFIG.CNC.spellLevels[s], {levels: levels[sl]});
+      else if (!spellbook[s]) {
+        registerSection(sl, s, CONFIG.CNC.spellLevels[s], {
+          levels: levels[sl],
+        });
       }
 
       // Add the spell to the relevant heading
@@ -330,32 +371,36 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _filterItems(items, filters) {
-    return items.filter(item => {
+    return items.filter((item) => {
       const data = item.data;
 
       // Action usage
-      for ( let f of ["action", "bonus", "reaction"] ) {
-        if ( filters.has(f) ) {
-          if ((data.activation && (data.activation.type !== f))) return false;
+      for (const f of ["action", "bonus", "reaction"]) {
+        if (filters.has(f)) {
+          if (data.activation && data.activation.type !== f) return false;
         }
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") ) {
+      if (filters.has("ritual")) {
         if (data.components.ritual !== true) return false;
       }
-      if ( filters.has("concentration") ) {
+      if (filters.has("concentration")) {
         if (data.components.concentration !== true) return false;
       }
-      if ( filters.has("prepared") ) {
-        if ( data.level === 0 || ["innate", "always"].includes(data.preparation.mode) ) return true;
-        if ( this.actor.data.type === "npc" ) return true;
+      if (filters.has("prepared")) {
+        if (
+          data.level === 0 ||
+          ["innate", "always"].includes(data.preparation.mode)
+        )
+          return true;
+        if (this.actor.data.type === "npc") return true;
         return data.preparation.prepared;
       }
 
       // Equipment-specific filters
-      if ( filters.has("equipped") ) {
-        if ( data.equipped !== true ) return false;
+      if (filters.has("equipped")) {
+        if (data.equipped !== true) return false;
       }
       return true;
     });
@@ -372,12 +417,13 @@ export default class ActorSheet5e extends ActorSheet {
       0: '<i class="far fa-circle"></i>',
       0.5: '<i class="fas fa-adjust"></i>',
       1: '<i class="fas fa-check"></i>',
-      2: '<i class="fas fa-check-double"></i>'
+      2: '<i class="fas fa-check-double"></i>',
     };
     return icons[level];
   }
 
   /* -------------------------------------------- */
+
   /*  Event Listeners and Handlers
   /* -------------------------------------------- */
 
@@ -386,59 +432,73 @@ export default class ActorSheet5e extends ActorSheet {
    * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
    */
   activateListeners(html) {
-
     // Activate Item Filters
     const filterLists = html.find(".filter-list");
     filterLists.each(this._initializeFilterItemList.bind(this));
     filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
-    html.find('.item .item-name.rollable h4').click(event => this._onItemSummary(event));
+    html
+      .find(".item .item-name.rollable h4")
+      .click((event) => this._onItemSummary(event));
 
     // Editable Only Listeners
-    if ( this.isEditable ) {
-
+    if (this.isEditable) {
       // Input focus and update
       const inputs = html.find("input");
-      inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
+      inputs.focus((ev) => ev.currentTarget.select());
+      inputs
+        .addBack()
+        .find('[data-dtype="Number"]')
+        .change(this._onChangeInputDelta.bind(this));
 
       // Ability Proficiency
-      html.find('.ability-proficiency').click(this._onToggleAbilityProficiency.bind(this));
+      html
+        .find(".ability-proficiency")
+        .click(this._onToggleAbilityProficiency.bind(this));
 
       // Toggle Skill Proficiency
-      html.find('.skill-proficiency').on("click contextmenu", this._onCycleSkillProficiency.bind(this));
+      html
+        .find(".skill-proficiency")
+        .on("click contextmenu", this._onCycleSkillProficiency.bind(this));
 
       // Trait Selector
-      html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+      html.find(".trait-selector").click(this._onTraitSelector.bind(this));
 
       // Configure Special Flags
-      html.find('.config-button').click(this._onConfigMenu.bind(this));
+      html.find(".config-button").click(this._onConfigMenu.bind(this));
 
       // Owned Item management
-      html.find('.item-create').click(this._onItemCreate.bind(this));
-      html.find('.item-edit').click(this._onItemEdit.bind(this));
-      html.find('.item-delete').click(this._onItemDelete.bind(this));
-      html.find('.item-uses input').click(ev => ev.target.select()).change(this._onUsesChange.bind(this));
-      html.find('.slot-max-override').click(this._onSpellSlotOverride.bind(this));
+      html.find(".item-create").click(this._onItemCreate.bind(this));
+      html.find(".item-edit").click(this._onItemEdit.bind(this));
+      html.find(".item-delete").click(this._onItemDelete.bind(this));
+      html
+        .find(".item-uses input")
+        .click((ev) => ev.target.select())
+        .change(this._onUsesChange.bind(this));
+      html
+        .find(".slot-max-override")
+        .click(this._onSpellSlotOverride.bind(this));
 
       // Active Effect management
-      html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.entity));
+      html
+        .find(".effect-control")
+        .click((ev) => onManageActiveEffect(ev, this.entity));
     }
 
     // Owner Only Listeners
-    if ( this.actor.owner ) {
-
+    if (this.actor.owner) {
       // Ability Checks
-      html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
-
+      html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
 
       // Roll Skill Checks
-      html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+      html.find(".skill-name").click(this._onRollSkillCheck.bind(this));
 
       // Item Rolling
-      html.find('.item .item-image').click(event => this._onItemRoll(event));
-      html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+      html.find(".item .item-image").click((event) => this._onItemRoll(event));
+      html
+        .find(".item .item-recharge")
+        .click((event) => this._onItemRecharge(event));
     }
 
     // Otherwise remove rollable classes
@@ -459,13 +519,14 @@ export default class ActorSheet5e extends ActorSheet {
   _initializeFilterItemList(i, ul) {
     const set = this._filters[ul.dataset.filter];
     const filters = ul.querySelectorAll(".filter-item");
-    for ( let li of filters ) {
-      if ( set.has(li.dataset.filter) ) li.classList.add("active");
+    for (const li of filters) {
+      if (set.has(li.dataset.filter)) li.classList.add("active");
     }
   }
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+
   /* -------------------------------------------- */
 
   /**
@@ -476,10 +537,10 @@ export default class ActorSheet5e extends ActorSheet {
   _onChangeInputDelta(event) {
     const input = event.target;
     const value = input.value;
-    if ( ["+", "-"].includes(value[0]) ) {
-      let delta = parseFloat(value);
+    if (["+", "-"].includes(value[0])) {
+      const delta = parseFloat(value);
       input.value = getProperty(this.actor.data, input.name) + delta;
-    } else if ( value[0] === "=" ) {
+    } else if (value[0] === "=") {
       input.value = value.slice(1);
     }
   }
@@ -494,7 +555,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onConfigMenu(event) {
     event.preventDefault();
     const button = event.currentTarget;
-    switch ( button.dataset.action ) {
+    switch (button.dataset.action) {
       case "movement":
         new ActorMovementConfig(this.object).render(true);
         break;
@@ -521,13 +582,13 @@ export default class ActorSheet5e extends ActorSheet {
     // Get the current level and the array of levels
     const level = parseFloat(field.val());
     const levels = [0, 1, 0.5, 2];
-    let idx = levels.indexOf(level);
+    const idx = levels.indexOf(level);
 
     // Toggle next level - forward on click, backwards on right
-    if ( event.type === "click" ) {
-      field.val(levels[(idx === levels.length - 1) ? 0 : idx + 1]);
-    } else if ( event.type === "contextmenu" ) {
-      field.val(levels[(idx === 0) ? levels.length - 1 : idx - 1]);
+    if (event.type === "click") {
+      field.val(levels[idx === levels.length - 1 ? 0 : idx + 1]);
+    } else if (event.type === "contextmenu") {
+      field.val(levels[idx === 0 ? levels.length - 1 : idx - 1]);
     }
 
     // Update the field value and save the form
@@ -538,83 +599,93 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('cnc', 'allowPolymorphing'));
-    if ( !canPolymorph ) return false;
+    const canPolymorph =
+      game.user.isGM ||
+      (this.actor.owner && game.settings.get("cnc", "allowPolymorphing"));
+    if (!canPolymorph) return false;
 
     // Get the target actor
     let sourceActor = null;
     if (data.pack) {
-      const pack = game.packs.find(p => p.collection === data.pack);
+      const pack = game.packs.find((p) => p.collection === data.pack);
       sourceActor = await pack.getEntity(data.id);
     } else {
       sourceActor = game.actors.get(data.id);
     }
-    if ( !sourceActor ) return;
+    if (!sourceActor) return;
 
     // Define a function to record polymorph settings for future use
-    const rememberOptions = html => {
+    const rememberOptions = (html) => {
       const options = {};
-      html.find('input').each((i, el) => {
+      html.find("input").each((i, el) => {
         options[el.name] = el.checked;
       });
-      const settings = mergeObject(game.settings.get('cnc', 'polymorphSettings') || {}, options);
-      game.settings.set('cnc', 'polymorphSettings', settings);
+      const settings = mergeObject(
+        game.settings.get("cnc", "polymorphSettings") || {},
+        options
+      );
+      game.settings.set("cnc", "polymorphSettings", settings);
       return settings;
     };
 
     // Create and render the Dialog
-    return new Dialog({
-      title: game.i18n.localize('CNC.PolymorphPromptTitle'),
-      content: {
-        options: game.settings.get('cnc', 'polymorphSettings'),
-        i18n: CNC.polymorphSettings,
-        isToken: this.actor.isToken
+    return new Dialog(
+      {
+        title: game.i18n.localize("CNC.PolymorphPromptTitle"),
+        content: {
+          options: game.settings.get("cnc", "polymorphSettings"),
+          i18n: CNC.polymorphSettings,
+          isToken: this.actor.isToken,
+        },
+        default: "accept",
+        buttons: {
+          accept: {
+            icon: '<i class="fas fa-check"></i>',
+            label: game.i18n.localize("CNC.PolymorphAcceptSettings"),
+            callback: (html) =>
+              this.actor.transformInto(sourceActor, rememberOptions(html)),
+          },
+          wildshape: {
+            icon: '<i class="fas fa-paw"></i>',
+            label: game.i18n.localize("CNC.PolymorphWildShape"),
+            callback: (html) =>
+              this.actor.transformInto(sourceActor, {
+                keepBio: true,
+                keepClass: true,
+                keepMental: true,
+                mergeSaves: true,
+                mergeSkills: true,
+                transformTokens: rememberOptions(html).transformTokens,
+              }),
+          },
+          polymorph: {
+            icon: '<i class="fas fa-pastafarianism"></i>',
+            label: game.i18n.localize("CNC.Polymorph"),
+            callback: (html) =>
+              this.actor.transformInto(sourceActor, {
+                transformTokens: rememberOptions(html).transformTokens,
+              }),
+          },
+          cancel: {
+            icon: '<i class="fas fa-times"></i>',
+            label: game.i18n.localize("Cancel"),
+          },
+        },
       },
-      default: 'accept',
-      buttons: {
-        accept: {
-          icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize('CNC.PolymorphAcceptSettings'),
-          callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
-        },
-        wildshape: {
-          icon: '<i class="fas fa-paw"></i>',
-          label: game.i18n.localize('CNC.PolymorphWildShape'),
-          callback: html => this.actor.transformInto(sourceActor, {
-            keepBio: true,
-            keepClass: true,
-            keepMental: true,
-            mergeSaves: true,
-            mergeSkills: true,
-            transformTokens: rememberOptions(html).transformTokens
-          })
-        },
-        polymorph: {
-          icon: '<i class="fas fa-pastafarianism"></i>',
-          label: game.i18n.localize('CNC.Polymorph'),
-          callback: html => this.actor.transformInto(sourceActor, {
-            transformTokens: rememberOptions(html).transformTokens
-          })
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize('Cancel')
-        }
+      {
+        classes: ["dialog", "cnc"],
+        width: 600,
+        template: "systems/cnc/templates/apps/polymorph-prompt.html",
       }
-    }, {
-      classes: ['dialog', 'cnc'],
-      width: 600,
-      template: 'systems/cnc/templates/apps/polymorph-prompt.html'
-    }).render(true);
+    ).render(true);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onDropItemCreate(itemData) {
-
     // Create a Consumable spell scroll on the Inventory tab
-    if ( (itemData.type === "spell") && (this._tabs[0].active === "inventory") ) {
+    if (itemData.type === "spell" && this._tabs[0].active === "inventory") {
       const scroll = await ItemCnc.createScrollFromSpell(itemData);
       itemData = scroll.data;
     }
@@ -630,10 +701,11 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {MouseEvent} event    The originating click event
    * @private
    */
-  async _onSpellSlotOverride (event) {
+  async _onSpellSlotOverride(event) {
     const span = event.currentTarget.parentElement;
     const level = span.dataset.level;
-    const override = this.actor.data.data.spells[level].override || span.dataset.slots;
+    const override =
+      this.actor.data.data.spells[level].override || span.dataset.slots;
     const input = document.createElement("INPUT");
     input.type = "text";
     input.name = `data.spells.${level}.override`;
@@ -655,12 +727,16 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   async _onUsesChange(event) {
-      event.preventDefault();
-      const itemId = event.currentTarget.closest(".item").dataset.itemId;
-      const item = this.actor.getOwnedItem(itemId);
-      const uses = Math.clamped(0, parseInt(event.target.value), item.data.data.uses.max);
-      event.target.value = uses;
-      return item.update({ 'data.uses.value': uses });
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    const uses = Math.clamped(
+      0,
+      parseInt(event.target.value),
+      item.data.data.uses.max
+    );
+    event.target.value = uses;
+    return item.update({ "data.uses.value": uses });
   }
 
   /* -------------------------------------------- */
@@ -688,7 +764,7 @@ export default class ActorSheet5e extends ActorSheet {
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.getOwnedItem(itemId);
     return item.rollRecharge();
-  };
+  }
 
   /* -------------------------------------------- */
 
@@ -698,18 +774,22 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onItemSummary(event) {
     event.preventDefault();
-    let li = $(event.currentTarget).parents(".item"),
-        item = this.actor.getOwnedItem(li.data("item-id")),
-        chatData = item.getChatData({secrets: this.actor.owner});
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.getOwnedItem(li.data("item-id"));
+    const chatData = item.getChatData({ secrets: this.actor.owner });
 
     // Toggle summary
-    if ( li.hasClass("expanded") ) {
-      let summary = li.children(".item-summary");
+    if (li.hasClass("expanded")) {
+      const summary = li.children(".item-summary");
       summary.slideUp(200, () => summary.remove());
     } else {
-      let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
-      let props = $(`<div class="item-properties"></div>`);
-      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
+      const div = $(
+        `<div class="item-summary">${chatData.description.value}</div>`
+      );
+      const props = $('<div class="item-properties"></div>');
+      chatData.properties.forEach((p) =>
+        props.append(`<span class="tag">${p}</span>`)
+      );
       div.append(props);
       li.append(div.hide());
       div.slideDown(200);
@@ -729,11 +809,11 @@ export default class ActorSheet5e extends ActorSheet {
     const header = event.currentTarget;
     const type = header.dataset.type;
     const itemData = {
-      name: game.i18n.format("CNC.ItemNew", {type: type.capitalize()}),
+      name: game.i18n.format("CNC.ItemNew", { type: type.capitalize() }),
       type: type,
-      data: duplicate(header.dataset)
+      data: duplicate(header.dataset),
     };
-    delete itemData.data["type"];
+    delete itemData.data.type;
     return this.actor.createEmbeddedEntity("OwnedItem", itemData);
   }
 
@@ -773,8 +853,8 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _onRollAbilityTest(event) {
     event.preventDefault();
-    let ability = event.currentTarget.parentElement.dataset.ability;
-    this.actor.rollAbility(ability, {event: event});
+    const ability = event.currentTarget.parentElement.dataset.ability;
+    this.actor.rollAbility(ability, { event: event });
   }
 
   /* -------------------------------------------- */
@@ -787,7 +867,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onRollSkillCheck(event) {
     event.preventDefault();
     const skill = event.currentTarget.parentElement.dataset.skill;
-    this.actor.rollSkill(skill, {event: event});
+    this.actor.rollSkill(skill, { event: event });
   }
 
   /* -------------------------------------------- */
@@ -800,7 +880,7 @@ export default class ActorSheet5e extends ActorSheet {
   _onToggleAbilityProficiency(event) {
     event.preventDefault();
     const field = event.currentTarget.previousElementSibling;
-    this.actor.update({[field.name]: 1 - parseInt(field.value)});
+    this.actor.update({ [field.name]: 1 - parseInt(field.value) });
   }
 
   /* -------------------------------------------- */
@@ -815,7 +895,7 @@ export default class ActorSheet5e extends ActorSheet {
     const li = event.currentTarget;
     const set = this._filters[li.parentElement.dataset.filter];
     const filter = li.dataset.filter;
-    if ( set.has(filter) ) set.delete(filter);
+    if (set.has(filter)) set.delete(filter);
     else set.add(filter);
     this.render();
   }
@@ -833,22 +913,22 @@ export default class ActorSheet5e extends ActorSheet {
     const label = a.parentElement.querySelector("label");
     const choices = CONFIG.CNC[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
-    new TraitSelector(this.actor, options).render(true)
+    new TraitSelector(this.actor, options).render(true);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   _getHeaderButtons() {
-    let buttons = super._getHeaderButtons();
+    const buttons = super._getHeaderButtons();
 
     // Add button to revert polymorph
-    if ( !this.actor.isPolymorphed || this.actor.isToken ) return buttons;
+    if (!this.actor.isPolymorphed || this.actor.isToken) return buttons;
     buttons.unshift({
-      label: 'CNC.PolymorphRestoreTransformation',
+      label: "CNC.PolymorphRestoreTransformation",
       class: "restore-transformation",
       icon: "fas fa-backward",
-      onclick: ev => this.actor.revertOriginalForm()
+      onclick: (ev) => this.actor.revertOriginalForm(),
     });
     return buttons;
   }

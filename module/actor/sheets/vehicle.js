@@ -14,7 +14,7 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
     return mergeObject(super.defaultOptions, {
       classes: ["cnc", "sheet", "actor", "vehicle"],
       width: 605,
-      height: 680
+      height: 680,
     });
   }
 
@@ -25,8 +25,8 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    */
   static get newCargo() {
     return {
-      name: '',
-      quantity: 1
+      name: "",
+      quantity: 1,
     };
   }
 
@@ -40,9 +40,11 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    * @private
    */
   _computeEncumbrance(totalWeight, actorData) {
-
     // Compute currency weight
-    const totalCoins = Object.values(actorData.data.currency).reduce((acc, denom) => acc + denom, 0);
+    const totalCoins = Object.values(actorData.data.currency).reduce(
+      (acc, denom) => acc + denom,
+      0
+    );
     totalWeight += totalCoins / CONFIG.CNC.encumbrance.currencyPerWeight;
 
     // Vehicle weights are an order of magnitude greater.
@@ -51,7 +53,7 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
     // Compute overall encumbrance
     const max = actorData.data.attributes.capacity.cargo;
     const pct = Math.clamped((totalWeight * 100) / max, 0, 100);
-    return {value: totalWeight.toNearest(0.1), max, pct};
+    return { value: totalWeight.toNearest(0.1), max, pct };
   }
 
   /* -------------------------------------------- */
@@ -62,25 +64,28 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    * @private
    */
   _prepareCrewedItem(item) {
-
     // Determine crewed status
     const isCrewed = item.data.crewed;
-    item.toggleClass = isCrewed ? 'active' : '';
-    item.toggleTitle = game.i18n.localize(`CNC.${isCrewed ? 'Crewed' : 'Uncrewed'}`);
+    item.toggleClass = isCrewed ? "active" : "";
+    item.toggleTitle = game.i18n.localize(
+      `CNC.${isCrewed ? "Crewed" : "Uncrewed"}`
+    );
 
     // Handle crew actions
-    if (item.type === 'feat' && item.data.activation.type === 'crew') {
+    if (item.type === "feat" && item.data.activation.type === "crew") {
       item.crew = item.data.activation.cost;
-      item.cover = game.i18n.localize(`CNC.${item.data.cover ? 'CoverTotal' : 'None'}`);
-      if (item.data.cover === .5) item.cover = '½';
-      else if (item.data.cover === .75) item.cover = '¾';
-      else if (item.data.cover === null) item.cover = '—';
-      if (item.crew < 1 || item.crew === null) item.crew = '—';
+      item.cover = game.i18n.localize(
+        `CNC.${item.data.cover ? "CoverTotal" : "None"}`
+      );
+      if (item.data.cover === 0.5) item.cover = "½";
+      else if (item.data.cover === 0.75) item.cover = "¾";
+      else if (item.data.cover === null) item.cover = "—";
+      if (item.crew < 1 || item.crew === null) item.crew = "—";
     }
 
     // Prepare vehicle weapons
-    if (item.type === 'equipment' || item.type === 'weapon') {
-      item.threshold = item.data.hp.dt ? item.data.hp.dt : '—';
+    if (item.type === "equipment" || item.type === "weapon") {
+      item.threshold = item.data.hp.dt ? item.data.hp.dt : "—";
     }
   }
 
@@ -91,139 +96,159 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    * @private
    */
   _prepareItems(data) {
-    const cargoColumns = [{
-      label: game.i18n.localize('CNC.Quantity'),
-      css: 'item-qty',
-      property: 'quantity',
-      editable: 'Number'
-    }];
+    const cargoColumns = [
+      {
+        label: game.i18n.localize("CNC.Quantity"),
+        css: "item-qty",
+        property: "quantity",
+        editable: "Number",
+      },
+    ];
 
-    const equipmentColumns = [{
-      label: game.i18n.localize('CNC.Quantity'),
-      css: 'item-qty',
-      property: 'data.quantity'
-    }, {
-      label: game.i18n.localize('CNC.AC'),
-      css: 'item-ac',
-      property: 'data.armor.value'
-    }, {
-      label: game.i18n.localize('CNC.HP'),
-      css: 'item-hp',
-      property: 'data.hp.value',
-      editable: 'Number'
-    }, {
-      label: game.i18n.localize('CNC.Threshold'),
-      css: 'item-threshold',
-      property: 'threshold'
-    }];
+    const equipmentColumns = [
+      {
+        label: game.i18n.localize("CNC.Quantity"),
+        css: "item-qty",
+        property: "data.quantity",
+      },
+      {
+        label: game.i18n.localize("CNC.AC"),
+        css: "item-ac",
+        property: "data.armor.value",
+      },
+      {
+        label: game.i18n.localize("CNC.HP"),
+        css: "item-hp",
+        property: "data.hp.value",
+        editable: "Number",
+      },
+      {
+        label: game.i18n.localize("CNC.Threshold"),
+        css: "item-threshold",
+        property: "threshold",
+      },
+    ];
 
     const features = {
       actions: {
-        label: game.i18n.localize('CNC.ActionPl'),
+        label: game.i18n.localize("CNC.ActionPl"),
         items: [],
         crewable: true,
-        dataset: {type: 'feat', 'activation.type': 'crew'},
-        columns: [{
-          label: game.i18n.localize('CNC.VehicleCrew'),
-          css: 'item-crew',
-          property: 'crew'
-        }, {
-          label: game.i18n.localize('CNC.Cover'),
-          css: 'item-cover',
-          property: 'cover'
-        }]
+        dataset: { type: "feat", "activation.type": "crew" },
+        columns: [
+          {
+            label: game.i18n.localize("CNC.VehicleCrew"),
+            css: "item-crew",
+            property: "crew",
+          },
+          {
+            label: game.i18n.localize("CNC.Cover"),
+            css: "item-cover",
+            property: "cover",
+          },
+        ],
       },
       equipment: {
-        label: game.i18n.localize('CNC.ItemTypeEquipment'),
+        label: game.i18n.localize("CNC.ItemTypeEquipment"),
         items: [],
         crewable: true,
-        dataset: {type: 'equipment', 'armor.type': 'vehicle'},
-        columns: equipmentColumns
+        dataset: { type: "equipment", "armor.type": "vehicle" },
+        columns: equipmentColumns,
       },
       passive: {
-        label: game.i18n.localize('CNC.Features'),
+        label: game.i18n.localize("CNC.Features"),
         items: [],
-        dataset: {type: 'feat'}
+        dataset: { type: "feat" },
       },
       reactions: {
-        label: game.i18n.localize('CNC.ReactionPl'),
+        label: game.i18n.localize("CNC.ReactionPl"),
         items: [],
-        dataset: {type: 'feat', 'activation.type': 'reaction'}
+        dataset: { type: "feat", "activation.type": "reaction" },
       },
       weapons: {
-        label: game.i18n.localize('CNC.ItemTypeWeaponPl'),
+        label: game.i18n.localize("CNC.ItemTypeWeaponPl"),
         items: [],
         crewable: true,
-        dataset: {type: 'weapon', 'weapon-type': 'siege'},
-        columns: equipmentColumns
-      }
+        dataset: { type: "weapon", "weapon-type": "siege" },
+        columns: equipmentColumns,
+      },
     };
 
     const cargo = {
       crew: {
-        label: game.i18n.localize('CNC.VehicleCrew'),
+        label: game.i18n.localize("CNC.VehicleCrew"),
         items: data.data.cargo.crew,
-        css: 'cargo-row crew',
+        css: "cargo-row crew",
         editableName: true,
-        dataset: {type: 'crew'},
-        columns: cargoColumns
+        dataset: { type: "crew" },
+        columns: cargoColumns,
       },
       passengers: {
-        label: game.i18n.localize('CNC.VehiclePassengers'),
+        label: game.i18n.localize("CNC.VehiclePassengers"),
         items: data.data.cargo.passengers,
-        css: 'cargo-row passengers',
+        css: "cargo-row passengers",
         editableName: true,
-        dataset: {type: 'passengers'},
-        columns: cargoColumns
+        dataset: { type: "passengers" },
+        columns: cargoColumns,
       },
       cargo: {
-        label: game.i18n.localize('CNC.VehicleCargo'),
+        label: game.i18n.localize("CNC.VehicleCargo"),
         items: [],
-        dataset: {type: 'loot'},
-        columns: [{
-          label: game.i18n.localize('CNC.Quantity'),
-          css: 'item-qty',
-          property: 'data.quantity',
-          editable: 'Number'
-        }, {
-          label: game.i18n.localize('CNC.Price'),
-          css: 'item-price',
-          property: 'data.price',
-          editable: 'Number'
-        }, {
-          label: game.i18n.localize('CNC.Weight'),
-          css: 'item-weight',
-          property: 'data.weight',
-          editable: 'Number'
-        }]
-      }
+        dataset: { type: "loot" },
+        columns: [
+          {
+            label: game.i18n.localize("CNC.Quantity"),
+            css: "item-qty",
+            property: "data.quantity",
+            editable: "Number",
+          },
+          {
+            label: game.i18n.localize("CNC.Price"),
+            css: "item-price",
+            property: "data.price",
+            editable: "Number",
+          },
+          {
+            label: game.i18n.localize("CNC.Weight"),
+            css: "item-weight",
+            property: "data.weight",
+            editable: "Number",
+          },
+        ],
+      },
     };
 
     let totalWeight = 0;
     for (const item of data.items) {
       this._prepareCrewedItem(item);
-      if (item.type === 'weapon') features.weapons.items.push(item);
-      else if (item.type === 'equipment') features.equipment.items.push(item);
-      else if (item.type === 'loot') {
+      if (item.type === "weapon") features.weapons.items.push(item);
+      else if (item.type === "equipment") features.equipment.items.push(item);
+      else if (item.type === "loot") {
         totalWeight += (item.data.weight || 0) * item.data.quantity;
         cargo.cargo.items.push(item);
-      }
-      else if (item.type === 'feat') {
-        if (!item.data.activation.type || item.data.activation.type === 'none') {
+      } else if (item.type === "feat") {
+        if (
+          !item.data.activation.type ||
+          item.data.activation.type === "none"
+        ) {
           features.passive.items.push(item);
-        }
-        else if (item.data.activation.type === 'reaction') features.reactions.items.push(item);
+        } else if (item.data.activation.type === "reaction")
+          features.reactions.items.push(item);
         else features.actions.items.push(item);
       }
     }
 
     data.features = Object.values(features);
     data.cargo = Object.values(cargo);
-    data.data.attributes.encumbrance = this._computeEncumbrance(totalWeight, data);
+    data.data.attributes.encumbrance = this._computeEncumbrance(
+      totalWeight,
+      data
+    );
   }
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -231,21 +256,24 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
     super.activateListeners(html);
     if (!this.options.editable) return;
 
-    html.find('.item-toggle').click(this._onToggleItem.bind(this));
-    html.find('.item-hp input')
-      .click(evt => evt.target.select())
+    html.find(".item-toggle").click(this._onToggleItem.bind(this));
+    html
+      .find(".item-hp input")
+      .click((evt) => evt.target.select())
       .change(this._onHPChange.bind(this));
 
-    html.find('.item:not(.cargo-row) input[data-property]')
-      .click(evt => evt.target.select())
+    html
+      .find(".item:not(.cargo-row) input[data-property]")
+      .click((evt) => evt.target.select())
       .change(this._onEditInSheet.bind(this));
 
-    html.find('.cargo-row input')
-      .click(evt => evt.target.select())
+    html
+      .find(".cargo-row input")
+      .click((evt) => evt.target.select())
       .change(this._onCargoRowChange.bind(this));
 
     if (this.actor.data.data.attributes.actions.stations) {
-      html.find('.counter.actions, .counter.action-thresholds').hide();
+      html.find(".counter.actions, .counter.action-thresholds").hide();
     }
   }
 
@@ -260,9 +288,9 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
   _onCargoRowChange(event) {
     event.preventDefault();
     const target = event.currentTarget;
-    const row = target.closest('.item');
+    const row = target.closest(".item");
     const idx = Number(row.dataset.itemId);
-    const property = row.classList.contains('crew') ? 'crew' : 'passengers';
+    const property = row.classList.contains("crew") ? "crew" : "passengers";
 
     // Get the cargo entry
     const cargo = duplicate(this.actor.data.data.cargo[property]);
@@ -270,14 +298,14 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
     if (!entry) return null;
 
     // Update the cargo value
-    const key = target.dataset.property || 'name';
+    const key = target.dataset.property || "name";
     const type = target.dataset.dtype;
     let value = target.value;
-    if (type === 'Number') value = Number(value);
+    if (type === "Number") value = Number(value);
     entry[key] = value;
 
     // Perform the Actor update
-    return this.actor.update({[`data.cargo.${property}`]: cargo});
+    return this.actor.update({ [`data.cargo.${property}`]: cargo });
   }
 
   /* -------------------------------------------- */
@@ -290,16 +318,20 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    */
   _onEditInSheet(event) {
     event.preventDefault();
-    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
     const property = event.currentTarget.dataset.property;
     const type = event.currentTarget.dataset.dtype;
     let value = event.currentTarget.value;
     switch (type) {
-      case 'Number': value = parseInt(value); break;
-      case 'Boolean': value = value === 'true'; break;
+      case "Number":
+        value = parseInt(value);
+        break;
+      case "Boolean":
+        value = value === "true";
+        break;
     }
-    return item.update({[`${property}`]: value});
+    return item.update({ [`${property}`]: value });
   }
 
   /* -------------------------------------------- */
@@ -314,10 +346,10 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
     event.preventDefault();
     const target = event.currentTarget;
     const type = target.dataset.type;
-    if (type === 'crew' || type === 'passengers') {
+    if (type === "crew" || type === "passengers") {
       const cargo = duplicate(this.actor.data.data.cargo[type]);
       cargo.push(this.constructor.newCargo);
-      return this.actor.update({[`data.cargo.${type}`]: cargo});
+      return this.actor.update({ [`data.cargo.${type}`]: cargo });
     }
     return super._onItemCreate(event);
   }
@@ -332,12 +364,14 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    */
   _onItemDelete(event) {
     event.preventDefault();
-    const row = event.currentTarget.closest('.item');
-    if (row.classList.contains('cargo-row')) {
+    const row = event.currentTarget.closest(".item");
+    if (row.classList.contains("cargo-row")) {
       const idx = Number(row.dataset.itemId);
-      const type = row.classList.contains('crew') ? 'crew' : 'passengers';
-      const cargo = duplicate(this.actor.data.data.cargo[type]).filter((_, i) => i !== idx);
-      return this.actor.update({[`data.cargo.${type}`]: cargo});
+      const type = row.classList.contains("crew") ? "crew" : "passengers";
+      const cargo = duplicate(this.actor.data.data.cargo[type]).filter(
+        (_, i) => i !== idx
+      );
+      return this.actor.update({ [`data.cargo.${type}`]: cargo });
     }
 
     return super._onItemDelete(event);
@@ -353,11 +387,15 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    */
   _onHPChange(event) {
     event.preventDefault();
-    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
-    const hp = Math.clamped(0, parseInt(event.currentTarget.value), item.data.data.hp.max);
+    const hp = Math.clamped(
+      0,
+      parseInt(event.currentTarget.value),
+      item.data.data.hp.max
+    );
     event.currentTarget.value = hp;
-    return item.update({'data.hp.value': hp});
+    return item.update({ "data.hp.value": hp });
   }
 
   /* -------------------------------------------- */
@@ -370,9 +408,9 @@ export default class ActorSheetCncVehicle extends ActorSheetCnc {
    */
   _onToggleItem(event) {
     event.preventDefault();
-    const itemID = event.currentTarget.closest('.item').dataset.itemId;
+    const itemID = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemID);
     const crewed = !!item.data.data.crewed;
-    return item.update({'data.crewed': !crewed});
+    return item.update({ "data.crewed": !crewed });
   }
 };
