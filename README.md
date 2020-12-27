@@ -10,16 +10,21 @@ To install and use the C&C system for Foundry Virtual Tabletop, simply past the 
 
 https://raw.githubusercontent.com/switchspan/foundryvtt-cnc/main/system.json
 
+![Alt install System Screen](https://github.com/switchspan/foundryvtt-cnc/blob/main/ui/install_system_screen.png?raw=true)
+
 If you wish to manually install the system, you must clone or extract it into the `Data/systems/cnc` folder. You may do this by cloning the repository or downloading a zip archive from the [Releases Page](https://github.com/switchspan/foundryvtt-cnc/releases/).
 
 ## Community Contribution
 
 Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge
 requests for code changes. Approval for such requests involves code and (if necessary) design review by Switchspan. Please
-reach out on the Foundry Community Discord with any questions care of _@KillerRabbit_.
+reach out on the Foundry Community Discord with any questions care of _@KillerRabbit_.  
+
+
 
 ###### Maintainers
-* Ken Taylor (@switchspan)
+* Ken Taylor (@switchspan)  
+  [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E2325Z6)
 
 ###### Contributors
 * Ken Taylor (@switchspan)

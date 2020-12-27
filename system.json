@@ -2,7 +2,7 @@
   "name": "cnc",
   "title": "Castles & Crusades",
   "description": "Castles & Crusades from Troll Lord Games",
-  "version": "0.0.5",
+  "version": "0.0.4",
   "author": "Ken Taylor",
   "scripts": [],
   "esmodules": ["cnc.js"],

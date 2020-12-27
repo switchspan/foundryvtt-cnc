@@ -1,6 +1,6 @@
 {
   "name": "cnc",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Castles and Crusades RPG Support for Foundry VTT",
   "keywords": [
     "FoundryVTT",
@@ -19,11 +19,15 @@
   "author": "Ken Taylor <taylor.kenneth@gmail.com>",
   "main": "cnc.js",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "postversion": "gulp bump && git push && git push --tags"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-bump": "^3.2.0",
     "gulp-less": "^4.0.1",
-    "prettier": "2.2.1"
+    "json-bump": "^1.0.2",
+    "prettier": "2.2.1",
+    "yargs": "^16.2.0"
   }
 }
