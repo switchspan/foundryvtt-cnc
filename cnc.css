@@ -6,13 +6,13 @@
   font-family: 'Goudy Old Style';
   font-style: normal;
   font-weight: normal;
-  src: url('../../fonts/goudy-old-style/ufonts.com_goudyoldstylebt-roman-opentype.otf') format('opentype');
+  src: url('fonts/goudy-old-style/ufonts.com_goudyoldstylebt-roman-opentype.otf') format('opentype');
 }
 @font-face {
   font-family: 'Goudy Old Style Bold';
   font-style: normal;
   font-weight: bold;
-  src: url('../../fonts/goudy-old-style/ufonts.com_goudyoldstylebt-bold-opentype.otf') format('opentype');
+  src: url('fonts/goudy-old-style/ufonts.com_goudyoldstylebt-bold-opentype.otf') format('opentype');
 }
 @font-face {
   font-family: 'Modesto Condensed';
@@ -302,7 +302,6 @@
   border-bottom: 2px groove #eeede0;
   /* Character Name */
   /* Profile Image */
-  /* C&C Logo */
   /* Header Summary Details */
 }
 .cnc.sheet .sheet-header .header-details {
@@ -324,14 +323,6 @@
   margin: 0;
 }
 .cnc.sheet .sheet-header img.profile {
-  flex: 0 0 100px;
-  max-width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border: none;
-  border-right: 2px groove #eeede0;
-}
-.cnc.sheet .sheet-header image.logo {
   flex: 0 0 100px;
   max-width: 100px;
   height: 100px;
