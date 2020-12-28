@@ -302,6 +302,7 @@
   border-bottom: 2px groove #eeede0;
   /* Character Name */
   /* Profile Image */
+  /* C&C Logo */
   /* Header Summary Details */
 }
 .cnc.sheet .sheet-header .header-details {
@@ -323,6 +324,14 @@
   margin: 0;
 }
 .cnc.sheet .sheet-header img.profile {
+  flex: 0 0 100px;
+  max-width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: none;
+  border-right: 2px groove #eeede0;
+}
+.cnc.sheet .sheet-header image.logo {
   flex: 0 0 100px;
   max-width: 100px;
   height: 100px;
@@ -1386,6 +1395,11 @@
   flex: 0 0 160px;
   max-width: 160px;
   height: 160px;
+}
+.cnc.sheet.actor.character .sheet-header img.logo {
+  flex: 0  0 160px;
+  max-width: 160px;
+  background: url("ui/cnc_logo_charactersheet.jpg") repeat;
 }
 .cnc.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
