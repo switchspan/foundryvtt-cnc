@@ -1387,10 +1387,10 @@
   max-width: 160px;
   height: 160px;
 }
-.cnc.sheet.actor.character .sheet-header div.logo {
+.cnc.sheet.actor.character .sheet-header img.logo {
   flex: 0  0 160px;
   max-width: 160px;
-  background: url("ui/cnc_logo_charactersheet.jpg") repeat;
+  content: url("ui/cnc_logo_charactersheet.jpg");
 }
 .cnc.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
