@@ -9,7 +9,7 @@ export default class AbilityUseDialog extends Dialog {
 
     /**
      * Store a reference to the Item entity being used
-     * @type {Item5e}
+     * @type {ItemCnc}
      */
     this.item = item;
   }
@@ -21,7 +21,7 @@ export default class AbilityUseDialog extends Dialog {
   /**
    * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
    * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
-   * @param {Item5e} item
+   * @param {ItemCnc} item
    * @return {Promise}
    */
   static async create(item) {

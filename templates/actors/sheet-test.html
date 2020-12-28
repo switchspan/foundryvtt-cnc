@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../cnc.css">
+</head>
+<body>
+<div id="actor-ljaUyh87AXNhBsuw" class="app window-app cnc sheet actor character" data-appid="26" style="z-index: 100; width: 720px; height: 680px; left: 408px; top: 21px;">
+    <header class="window-header flexrow draggable resizable">
+        <h4 class="window-title">Test</h4>
+        <a class="header-button configure-sheet"><i class="fas fa-cog"></i>Sheet</a>
+        <a class="header-button configure-token"><i class="fas fa-user-circle"></i>Prototype Token</a>
+        <a class="header-button close"><i class="fas fa-times"></i>Close</a>
+    </header>
+
+    <section class="window-content">
+        <form class="editable flexcol" autocomplete="off">
+
+            <header class="sheet-header flexrow">
+                <img class="logo" title="Castles &amp; Crusades" data-edit="img">
+                <img class="profile" src="icons/svg/mystery-man.svg" title="Test" data-edit="img">
+
+                <section class="header-details flexrow">
+                    <h1 class="charname">
+                        <input name="name" type="text" value="Test" placeholder="Character Name">
+                    </h1>
+
+                    <aside class="header-exp flexcol">
+                        <div class="charlevel">
+                            <label>Level 0</label>
+                            <span class="levels"></span>
+                        </div>
+
+                        <div class="experience flexrow">
+                            <input name="data.details.xp.value" type="text" value="0" placeholder="0" data-dtype="Number">
+                            <span class="sep">/</span>
+                            <span class="max">300</span>
+                        </div>
+                        <div class="xpbar">
+                            <span class="bar" style="width: %"></span>
+                        </div>
+                    </aside>
+
+                    <ul class="summary flexrow">
+                        <li>
+                            <input type="text" name="data.details.race" value="" placeholder="Race">
+                        </li>
+                        <li>
+                            <input type="text" name="data.details.background" value="" placeholder="Background">
+                        </li>
+                        <li>
+                            <input type="text" name="data.details.alignment" value="" placeholder="Alignment">
+                        </li>
+                        <li class="proficiency">
+                            <span>Proficiency +1</span>
+                        </li>
+                    </ul>
+
+                    <ul class="attributes flexrow">
+                        <li class="attribute health">
+                            <h4 class="attribute-name box-title">Hit Points</h4>
+                            <div class="attribute-value multiple">
+                                <input name="data.attributes.hp.value" type="text" value="10" placeholder="10" data-dtype="Number">
+                                <span class="sep"> / </span>
+                                <input name="data.attributes.hp.max" type="text" value="10" placeholder="10" data-dtype="Number">
+                            </div>
+                            <footer class="attribute-footer">
+                                <input name="data.attributes.hp.temp" type="text" class="temphp" placeholder="+Temp" value="" data-dtype="Number">
+                                <input name="data.attributes.hp.tempmax" type="text" class="temphp" placeholder="+Max" value="" data-dtype="Number">
+                            </footer>
+                        </li>
+
+                        <li class="attribute">
+                            <h4 class="attribute-name box-title">Hit Dice</h4>
+                            <div class="attribute-value multiple">
+                                <label class="hit-dice">0 <span class="sep"> / </span> 0</label>
+                            </div>
+                            <footer class="attribute-footer">
+                                <a class="rest short-rest">S. Rest</a>
+                                <a class="rest long-rest">L. Rest</a>
+                            </footer>
+                        </li>
+
+                        <li class="attribute">
+                            <h4 class="attribute-name box-title">Armor Class</h4>
+                            <div class="attribute-value">
+                                <input name="data.attributes.ac.value" type="number" value="10" placeholder="10">
+                            </div>
+                            <footer class="attribute-footer">
+                                <span class="spell-dc">Spell DC 9</span>
+                            </footer>
+                        </li>
+
+                        <li class="attribute movement">
+                            <h4 class="attribute-name box-title">
+                                Movement
+                                <a class="config-button" data-action="movement" title="Configure Movement Speed"><i class="fas fa-cog"></i></a>
+                            </h4>
+                            <div class="attribute-value">
+                                <span>30 ft</span>
+                            </div>
+                            <footer class="attribute-footer">
+                                <span></span>
+                            </footer>
+                        </li>
+
+                        <li class="attribute initiative">
+                            <h4 class="attribute-name box-title rollable" data-action="rollInitiative">Initiative</h4>
+                            <div class="attribute-value">
+                                <span>+0</span>
+                            </div>
+                            <footer class="attribute-footer">
+                                <span>Modifier</span>
+                                <input name="data.attributes.init.value" type="text" data-dtype="Number" placeholder="0" value="+0">
+                            </footer>
+                        </li>
+                    </ul>
+                </section>
+            </header>
+
+            <nav class="sheet-navigation tabs" data-group="primary">
+                <a class="item active" data-tab="attributes">Attributes</a>
+                <a class="item" data-tab="inventory">Inventory</a>
+                <a class="item" data-tab="features">Features</a>
+                <a class="item" data-tab="spellbook">Spellbook</a>
+                <a class="item" data-tab="effects">Effects</a>
+                <a class="item" data-tab="biography">Biography</a>
+            </nav>
+
+            <section class="sheet-body">
+
+                <div class="tab attributes flexrow active" data-group="primary" data-tab="attributes">
+
+                    <ul class="ability-scores flexrow">
+                        <li class="ability " data-ability="str">
+                            <h4 class="ability-name box-title rollable">Strength</h4>
+                            <input class="ability-score" name="data.abilities.str.value" type="number" value="10" placeholder="10">
+                            <div class="ability-modifiers flexrow">
+                                <span class="ability-mod" title="Modifier">+0</span>
+                                <input type="hidden" name="data.abilities.str.proficient" value="0" data-dtype="Number">
+                                <a class="proficiency-toggle ability-proficiency" title="Proficiency"><i class="far fa-circle"></i></a>
+                                <span class="ability-save" title="Saving Throw">+0</span>
+                            </div>
+                        </li>
+                        <li class="ability " data-ability="dex">
+                            <h4 class="ability-name box-title rollable">Dexterity</h4>
+                            <input class="ability-score" name="data.abilities.dex.value" type="number" value="10" placeholder="10">
+                            <div class="ability-modifiers flexrow">
+                                <span class="ability-mod" title="Modifier">+0</span>
+                                <input type="hidden" name="data.abilities.dex.proficient" value="0" data-dtype="Number">
+                                <a class="proficiency-toggle ability-proficiency" title="Proficiency"><i class="far fa-circle"></i></a>
+                                <span class="ability-save" title="Saving Throw">+0</span>
+                            </div>
+                        </li>
+                        <li class="ability " data-ability="con">
+                            <h4 class="ability-name box-title rollable">Constitution</h4>
+                            <input class="ability-score" name="data.abilities.con.value" type="number" value="10" placeholder="10">
+                            <div class="ability-modifiers flexrow">
+                                <span class="ability-mod" title="Modifier">+0</span>
+                                <input type="hidden" name="data.abilities.con.proficient" value="0" data-dtype="Number">
+                                <a class="proficiency-toggle ability-proficiency" title="Proficiency"><i class="far fa-circle"></i></a>
+                                <span class="ability-save" title="Saving Throw">+0</span>
+                            </div>
+                        </li>
+                        <li class="ability " data-ability="int">
+                            <h4 class="ability-name box-title rollable">Intelligence</h4>
+                            <input class="ability-score" name="data.abilities.int.value" type="number" value="10" placeholder="10">
+                            <div class="ability-modifiers flexrow">
+                                <span class="ability-mod" title="Modifier">+0</span>
+                                <input type="hidden" name="data.abilities.int.proficient" value="0" data-dtype="Number">
+                                <a class="proficiency-toggle ability-proficiency" title="Proficiency"><i class="far fa-circle"></i></a>
+                                <span class="ability-save" title="Saving Throw">+0</span>
+                            </div>
+                        </li>
+                        <li class="ability " data-ability="wis">
+                            <h4 class="ability-name box-title rollable">Wisdom</h4>
+                            <input class="ability-score" name="data.abilities.wis.value" type="number" value="10" placeholder="10">
+                            <div class="ability-modifiers flexrow">
+                                <span class="ability-mod" title="Modifier">+0</span>
+                                <input type="hidden" name="data.abilities.wis.proficient" value="0" data-dtype="Number">
+                                <a class="proficiency-toggle ability-proficiency" title="Proficiency"><i class="far fa-circle"></i></a>
+                                <span class="ability-save" title="Saving Throw">+0</span>
+                            </div>
+                        </li>
+                        <li class="ability " data-ability="cha">
+                            <h4 class="ability-name box-title rollable">Charisma</h4>
+                            <input class="ability-score" name="data.abilities.cha.value" type="number" value="10" placeholder="10">
+                            <div class="ability-modifiers flexrow">
+                                <span class="ability-mod" title="Modifier">+0</span>
+                                <input type="hidden" name="data.abilities.cha.proficient" value="0" data-dtype="Number">
+                                <a class="proficiency-toggle ability-proficiency" title="Proficiency"><i class="far fa-circle"></i></a>
+                                <span class="ability-save" title="Saving Throw">+0</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="skills-list">
+                        <li class="skill flexrow " data-skill="acr">
+                            <input type="hidden" name="data.skills.acr.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Acrobatics</h4>
+                            <span class="skill-ability">dex</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="ani">
+                            <input type="hidden" name="data.skills.ani.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Animal Handling</h4>
+                            <span class="skill-ability">wis</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="arc">
+                            <input type="hidden" name="data.skills.arc.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Arcana</h4>
+                            <span class="skill-ability">int</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="ath">
+                            <input type="hidden" name="data.skills.ath.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Athletics</h4>
+                            <span class="skill-ability">str</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="dec">
+                            <input type="hidden" name="data.skills.dec.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Deception</h4>
+                            <span class="skill-ability">cha</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="his">
+                            <input type="hidden" name="data.skills.his.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">History</h4>
+                            <span class="skill-ability">int</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="ins">
+                            <input type="hidden" name="data.skills.ins.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Insight</h4>
+                            <span class="skill-ability">wis</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="itm">
+                            <input type="hidden" name="data.skills.itm.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Intimidation</h4>
+                            <span class="skill-ability">cha</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="inv">
+                            <input type="hidden" name="data.skills.inv.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Investigation</h4>
+                            <span class="skill-ability">int</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="med">
+                            <input type="hidden" name="data.skills.med.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Medicine</h4>
+                            <span class="skill-ability">wis</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="nat">
+                            <input type="hidden" name="data.skills.nat.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Nature</h4>
+                            <span class="skill-ability">int</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="prc">
+                            <input type="hidden" name="data.skills.prc.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Perception</h4>
+                            <span class="skill-ability">wis</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="prf">
+                            <input type="hidden" name="data.skills.prf.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Performance</h4>
+                            <span class="skill-ability">cha</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="per">
+                            <input type="hidden" name="data.skills.per.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Persuasion</h4>
+                            <span class="skill-ability">cha</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="rel">
+                            <input type="hidden" name="data.skills.rel.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Religion</h4>
+                            <span class="skill-ability">int</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="slt">
+                            <input type="hidden" name="data.skills.slt.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Sleight of Hand</h4>
+                            <span class="skill-ability">dex</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="ste">
+                            <input type="hidden" name="data.skills.ste.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Stealth</h4>
+                            <span class="skill-ability">dex</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                        <li class="skill flexrow " data-skill="sur">
+                            <input type="hidden" name="data.skills.sur.value" value="0" data-dtype="Number">
+                            <a class="proficiency-toggle skill-proficiency" title="Not Proficient"><i class="far fa-circle"></i></a>
+                            <h4 class="skill-name rollable">Survival</h4>
+                            <span class="skill-ability">wis</span>
+                            <span class="skill-mod">+0</span>
+                            <span class="skill-passive">(10)</span>
+                        </li>
+                    </ul>
+
+                    <section class="center-pane flexcol">
+
+                        <ul class="attributes flexrow">
+                            <li class="attribute resource">
+                                <h4 class="attribute-name box-title">
+                                    <input name="data.resources.primary.label" type="text" value="" placeholder="Resource 1">
+                                </h4>
+                                <div class="attribute-value">
+                                    <label class="recharge checkbox">
+                                        SR <input name="data.resources.primary.sr" type="checkbox">
+                                    </label>
+
+                                    <input name="data.resources.primary.value" type="number" value="" placeholder="0">
+                                    <span class="sep"> / </span>
+                                    <input name="data.resources.primary.max" type="number" value="" placeholder="0">
+
+                                    <label class="recharge checkbox">
+                                        LR <input name="data.resources.primary.lr" type="checkbox">
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="attribute resource">
+                                <h4 class="attribute-name box-title">
+                                    <input name="data.resources.secondary.label" type="text" value="" placeholder="Resource 2">
+                                </h4>
+                                <div class="attribute-value">
+                                    <label class="recharge checkbox">
+                                        SR <input name="data.resources.secondary.sr" type="checkbox">
+                                    </label>
+
+                                    <input name="data.resources.secondary.value" type="number" value="" placeholder="0">
+                                    <span class="sep"> / </span>
+                                    <input name="data.resources.secondary.max" type="number" value="" placeholder="0">
+
+                                    <label class="recharge checkbox">
+                                        LR <input name="data.resources.secondary.lr" type="checkbox">
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="attribute resource">
+                                <h4 class="attribute-name box-title">
+                                    <input name="data.resources.tertiary.label" type="text" value="" placeholder="Resource 3">
+                                </h4>
+                                <div class="attribute-value">
+                                    <label class="recharge checkbox">
+                                        SR <input name="data.resources.tertiary.sr" type="checkbox">
+                                    </label>
+
+                                    <input name="data.resources.tertiary.value" type="number" value="" placeholder="0">
+                                    <span class="sep"> / </span>
+                                    <input name="data.resources.tertiary.max" type="number" value="" placeholder="0">
+
+                                    <label class="recharge checkbox">
+                                        LR <input name="data.resources.tertiary.lr" type="checkbox">
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="counters">
+                            <div class="counter flexrow death-saves">
+                                <h4 class="rollable" data-action="rollDeathSave">Death Saves</h4>
+                                <div class="counter-value">
+                                    <i class="fas fa-check"></i>
+                                    <input name="data.attributes.death.success" type="number" placeholder="0" value="0">
+                                    <i class="fas fa-times"></i>
+                                    <input name="data.attributes.death.failure" type="number" placeholder="0" value="0">
+                                </div>
+                            </div>
+                            <div class="counter flexrow exhaustion">
+                                <h4>Exhaustion</h4>
+                                <div class="counter-value">
+                                    <input name="data.attributes.exhaustion" type="number" placeholder="0" value="0">
+                                </div>
+                            </div>
+                            <div class="counter flexrow inspiration">
+                                <h4>Inspiration</h4>
+                                <div class="counter-value">
+                                    <input type="checkbox" name="data.attributes.inspiration" data-dtype="Boolean">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="traits">
+                            <div class="form-group">
+                                <label>Size</label>
+                                <select class="actor-size" name="data.traits.size">
+                                    <option value="grg">Gargantuan</option>
+                                    <option value="huge">Huge</option>
+                                    <option value="lg">Large</option>
+                                    <option value="med" selected="">Medium</option>
+                                    <option value="sm">Small</option>
+                                    <option value="tiny">Tiny</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Senses</label>
+                                <a class="config-button" data-action="senses" title="Configure Senses"><i class="fas fa-cog"></i></a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Languages</label>
+                                <a class="trait-selector" data-options="languages" data-target="data.traits.languages">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Damage Immunities</label>
+                                <a class="trait-selector" data-options="damageResistanceTypes" data-target="data.traits.di">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Damage Resistances</label>
+                                <a class="trait-selector" data-options="damageResistanceTypes" data-target="data.traits.dr">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Damage Vulnerabilities</label>
+                                <a class="trait-selector" data-options="damageResistanceTypes" data-target="data.traits.dv">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Condition Immunities</label>
+                                <a class="trait-selector" data-options="conditionTypes" data-target="data.traits.ci">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Weapon Proficiencies</label>
+                                <a class="trait-selector" data-options="weaponProficiencies" data-target="data.traits.weaponProf">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Armor Proficiencies</label>
+                                <a class="trait-selector" data-options="armorProficiencies" data-target="data.traits.armorProf">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group inactive">
+                                <label>Tool Proficiencies</label>
+                                <a class="trait-selector" data-options="toolProficiencies" data-target="data.traits.toolProf">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <ul class="traits-list">
+                                </ul>
+                            </div>
+
+                            <div class="form-group ">
+                                <label>Special Traits</label>
+                                <a class="config-button" data-action="flags" title="Special Traits"><i class="fas fa-cog"></i></a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+                    <div class="inventory-filters flexrow">
+
+                        <ol class="currency flexrow">
+                            <h3>
+                                Currency
+                                <a class="currency-convert rollable" data-action="convertCurrency" title="Convert Currency">
+                                    <i class="fas fa-coins"></i>
+                                </a>
+                            </h3>
+                            <label class="denomination pp">Platinum</label>
+                            <input type="text" name="data.currency.pp" value="0" data-dtype="Number">
+                            <label class="denomination gp">Gold</label>
+                            <input type="text" name="data.currency.gp" value="0" data-dtype="Number">
+                            <label class="denomination ep">Electrum</label>
+                            <input type="text" name="data.currency.ep" value="0" data-dtype="Number">
+                            <label class="denomination sp">Silver</label>
+                            <input type="text" name="data.currency.sp" value="0" data-dtype="Number">
+                            <label class="denomination cp">Copper</label>
+                            <input type="text" name="data.currency.cp" value="0" data-dtype="Number">
+                        </ol>
+
+                        <ul class="filter-list flexrow" data-filter="inventory">
+                            <li class="filter-item" data-filter="action">Action</li>
+                            <li class="filter-item" data-filter="bonus">Bonus Action</li>
+                            <li class="filter-item" data-filter="reaction">Reaction</li>
+                            <li class="filter-item" data-filter="equipped">Equipped</li>
+                        </ul>
+                    </div>
+
+                    <ol class="items-list inventory-list">
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Weapons</h3>
+
+                            <div class="item-detail item-weight">Weight</div>
+
+                            <div class="item-detail item-uses">Charges</div>
+                            <div class="item-detail item-action">Usage</div>
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Item" data-type="weapon">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Equipment</h3>
+
+                            <div class="item-detail item-weight">Weight</div>
+
+                            <div class="item-detail item-uses">Charges</div>
+                            <div class="item-detail item-action">Usage</div>
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Item" data-type="equipment">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Consumables</h3>
+
+                            <div class="item-detail item-weight">Weight</div>
+
+                            <div class="item-detail item-uses">Charges</div>
+                            <div class="item-detail item-action">Usage</div>
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Item" data-type="consumable">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Tools</h3>
+
+                            <div class="item-detail item-weight">Weight</div>
+
+                            <div class="item-detail item-uses">Charges</div>
+                            <div class="item-detail item-action">Usage</div>
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Item" data-type="tool">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Containers</h3>
+
+                            <div class="item-detail item-weight">Weight</div>
+
+                            <div class="item-detail item-uses">Charges</div>
+                            <div class="item-detail item-action">Usage</div>
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Item" data-type="backpack">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Loot</h3>
+
+                            <div class="item-detail item-weight">Weight</div>
+
+                            <div class="item-detail item-uses">Charges</div>
+                            <div class="item-detail item-action">Usage</div>
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Item" data-type="loot">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                    </ol>
+
+
+                    <div class="encumbrance ">
+                        <span class="encumbrance-bar" style="width:0%"></span>
+                        <span class="encumbrance-label">0 / 150</span>
+                        <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
+                        <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>
+                        <i class="encumbrance-breakpoint encumbrance-66 arrow-up"></i>
+                        <i class="encumbrance-breakpoint encumbrance-66 arrow-down"></i>
+                    </div>
+                </div>
+
+                <div class="tab features flexcol" data-group="primary" data-tab="features">
+                    <div class="inventory-filters flexrow">
+                        <ul class="filter-list flexrow" data-filter="features">
+                            <li class="filter-item" data-filter="action">Action</li>
+                            <li class="filter-item" data-filter="bonus">Bonus Action</li>
+                            <li class="filter-item" data-filter="reaction">Reaction</li>
+                        </ul>
+                    </div>
+
+                    <ol class="items-list inventory-list">
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Class Levels</h3>
+
+
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Feature" data-type="class">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Active Abilities</h3>
+
+                            <div class="item-detail item-uses">Uses</div>
+                            <div class="item-detail item-action">Usage</div>
+
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Feature" data-type="feat" data-activation.type="action">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow">
+                            <h3 class="item-name flexrow">Passive Abilities</h3>
+
+
+
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Feature" data-type="feat">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                    </ol>
+                </div>
+
+                <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+                    <div class="inventory-filters spellbook-filters flexrow">
+                        <div class="form-group spellcasting-ability">
+                            <label>Spellcasting</label>
+                            <select name="data.attributes.spellcasting" data-type="String">
+                                <option value="">None</option>
+                                <option value="str">Strength</option>
+                                <option value="dex">Dexterity</option>
+                                <option value="con">Constitution</option>
+                                <option value="int" selected="">Intelligence</option>
+                                <option value="wis">Wisdom</option>
+                                <option value="cha">Charisma</option>
+                            </select>
+                            <span>DC 9</span>
+                        </div>
+
+                        <ul class="filter-list flexrow" data-filter="spellbook">
+                            <li class="filter-item" data-filter="action">Action</li>
+                            <li class="filter-item" data-filter="bonus">Bonus Action</li>
+                            <li class="filter-item" data-filter="reaction">Reaction</li>
+                            <li class="filter-item" data-filter="concentration">Conc.</li>
+                            <li class="filter-item" data-filter="ritual">Ritual</li>
+                            <li class="filter-item" data-filter="prepared">Prepared</li>
+                        </ul>
+                    </div>
+
+                    <ol class="items-list inventory-list">
+                        <li class="item flexrow inventory-header spellbook-header spellbook-empty">
+                            <div class="item-controls flexrow">
+                                <a class="item-control item-create" title="Create Spell" data-type="spell" data-level=""><i class="fas fa-plus"></i> Add Spell</a>
+                            </div>
+                        </li>
+                        <li class="item flexrow"><p class="notes">This character has no spellcaster levels, but you may add spells manually.</p></li>
+                    </ol>
+                </div>
+
+                <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+                    <ol class="items-list effects-list">
+                        <li class="items-header flexrow" data-effect-type="temporary">
+                            <h3 class="item-name effect-name flexrow">Temporary Effects</h3>
+                            <div class="effect-source">Source</div>
+                            <div class="effect-source">Duration</div>
+                            <div class="item-controls effect-controls flexrow">
+                                <a class="effect-control" data-action="create" title="Create Effect">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow" data-effect-type="passive">
+                            <h3 class="item-name effect-name flexrow">Passive Effects</h3>
+                            <div class="effect-source">Source</div>
+                            <div class="effect-source">Duration</div>
+                            <div class="item-controls effect-controls flexrow">
+                                <a class="effect-control" data-action="create" title="Create Effect">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                        <li class="items-header flexrow" data-effect-type="inactive">
+                            <h3 class="item-name effect-name flexrow">Inactive Effects</h3>
+                            <div class="effect-source">Source</div>
+                            <div class="effect-source">Duration</div>
+                            <div class="item-controls effect-controls flexrow">
+                                <a class="effect-control" data-action="create" title="Create Effect">
+                                    <i class="fas fa-plus"></i> Add
+                                </a>
+                            </div>
+                        </li>
+
+                        <ol class="item-list">
+                        </ol>
+                    </ol>
+                </div>
+
+                <div class="tab flexrow" data-group="primary" data-tab="biography">
+                    <div class="characteristics flexcol">
+                        <label>Appearance</label>
+                        <textarea name="data.details.appearance"></textarea>
+                        <label>Personality Traits</label>
+                        <textarea name="data.details.trait"></textarea>
+                        <label>Ideals</label>
+                        <textarea name="data.details.ideal"></textarea>
+                        <label>Bonds</label>
+                        <textarea name="data.details.bond"></textarea>
+                        <label>Flaws</label>
+                        <textarea name="data.details.flaw"></textarea>
+                    </div>
+                    <div class="biography">
+                        <div class="editor"><div class="editor-content" data-edit="data.details.biography.value"></div><a class="editor-edit"><i class="fas fa-edit"></i></a></div>
+                    </div>
+                </div>
+            </section>
+        </form></section>
+    <div class="window-resizable-handle"><i class="fas fa-arrows-alt-h"></i></div></div>
+</body>
+</html>

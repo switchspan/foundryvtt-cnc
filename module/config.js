@@ -245,13 +245,12 @@ CNC.consumableTypes = {
 /* -------------------------------------------- */
 
 /**
- * The valid currency denominations supported by the 5e system
+ * The valid currency denominations supported by the Castles & Crusades system
  * @type {Object}
  */
 CNC.currencies = {
   pp: "CNC.CurrencyPP",
   gp: "CNC.CurrencyGP",
-  ep: "CNC.CurrencyEP",
   sp: "CNC.CurrencySP",
   cp: "CNC.CurrencyCP",
 };
@@ -262,8 +261,7 @@ CNC.currencies = {
  */
 CNC.currencyConversion = {
   cp: { into: "sp", each: 10 },
-  sp: { into: "ep", each: 5 },
-  ep: { into: "gp", each: 2 },
+  sp: { into: "gp", each: 10 },
   gp: { into: "pp", each: 10 },
 };
 

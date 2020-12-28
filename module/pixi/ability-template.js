@@ -1,13 +1,13 @@
 import { CNC } from "../config.js";
 
 /**
- * A helper class for building MeasuredTemplates for 5e spells and abilities
+ * A helper class for building MeasuredTemplates for Castles & Crusades spells and abilities
  * @extends {MeasuredTemplate}
  */
 export default class AbilityTemplate extends MeasuredTemplate {
   /**
-   * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
-   * @param {Item5e} item               The Item object for which to construct the template
+   * A factory method to create an AbilityTemplate instance using provided data from an ItemCnc instance
+   * @param {ItemCnc} item               The Item object for which to construct the template
    * @return {AbilityTemplate|null}     The template object, or null if the item does not produce a template
    */
   static fromItem(item) {

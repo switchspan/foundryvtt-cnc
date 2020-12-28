@@ -6,7 +6,7 @@ import { CNC } from "../config.js";
 /**
  * Extend the base Actor class to implement additional system-specific logic.
  */
-export default class Actor5e extends Actor {
+export default class ActorCnc extends Actor {
   /**
    * Is this Actor currently polymorphed into some other creature?
    * @return {boolean}
@@ -149,7 +149,7 @@ export default class Actor5e extends Actor {
    * @param {string} subclassName     The subclass of the class being added, if any
    * @param {number} level            The number of levels in the added class
    * @param {number} priorLevel       The previous level of the added class
-   * @return {Promise<Item5e[]>}     Array of Item5e entities
+   * @return {Promise<ItemCnc[]>}     Array of ItemCnc entities
    */
   static async getClassFeatures({
     className = "",
@@ -236,7 +236,7 @@ export default class Actor5e extends Actor {
       // Get features to create
       if (changed) {
         const existing = new Set(this.items.map((i) => i.name));
-        const features = await Actor5e.getClassFeatures(config);
+        const features = await ActorCnc.getClassFeatures(config);
         for (const f of features) {
           if (!existing.has(f.name)) toCreate.push(f);
         }
@@ -1359,7 +1359,7 @@ export default class Actor5e extends Actor {
   /**
    * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
    * carried by an Actor.
-   * @return {Promise<Actor5e>}
+   * @return {Promise<ActorCnc>}
    */
   convertCurrency() {
     const curr = duplicate(this.data.data.currency);
@@ -1650,7 +1650,7 @@ export default class Actor5e extends Actor {
    */
   getSpellDC(ability) {
     console.warn(
-      "The Actor5e#getSpellDC(ability) method has been deprecated in favor of Actor5e#data.data.abilities[ability].dc"
+      "The ActorCnc#getSpellDC(ability) method has been deprecated in favor of ActorCnc#data.data.abilities[ability].dc"
     );
     return this.data.data.abilities[ability]?.dc;
   }
@@ -1659,13 +1659,13 @@ export default class Actor5e extends Actor {
 
   /**
    * Cast a Spell, consuming a spell slot of a certain level
-   * @param {Item5e} item   The spell being cast by the actor
+   * @param {ItemCnc} item   The spell being cast by the actor
    * @param {Event} event   The originating user interaction which triggered the cast
    * @deprecated since cnc 1.2.0
    */
   async useSpell(item, { configureDialog = true } = {}) {
     console.warn(
-      "The Actor5e#useSpell method has been deprecated in favor of Item5e#roll"
+      "The ActorCnc#useSpell method has been deprecated in favor of ItemCnc#roll"
     );
     if (item.data.type !== "spell") throw new Error("Wrong Item type");
     return item.roll();

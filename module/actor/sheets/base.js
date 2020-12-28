@@ -14,7 +14,7 @@ import {
  * This sheet is an Abstract layer which is not used.
  * @extends {ActorSheet}
  */
-export default class ActorSheet5e extends ActorSheet {
+export default class ActorSheetCnc extends ActorSheet {
   constructor(...args) {
     super(...args);
 

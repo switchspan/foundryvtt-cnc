@@ -1,5 +1,5 @@
 /**
- * A standardized helper function for managing core 5e "d20 rolls"
+ * A standardized helper function for managing core Castles & Crusades "d20 rolls"
  *
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
@@ -223,7 +223,7 @@ async function _d20RollDialog({
 /* -------------------------------------------- */
 
 /**
- * A standardized helper function for managing core 5e "d20 rolls"
+ * A standardized helper function for managing core Castles & Crusades "d20 rolls"
  *
  * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
  * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
