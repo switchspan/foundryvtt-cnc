@@ -22,7 +22,7 @@
     "build": "gulp css",
     "build:watch": "gulp",
     "preversion": "npm run build",
-    "version": "gulp bump && git add system.json && git add package.json",
+    "version": "gulp bump && git add system.json && git add package.json && git add cnc.js && git add cnc.css",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
