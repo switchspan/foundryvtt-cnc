@@ -13,6 +13,13 @@
   ],
   "packs": [
     {
+      "name": "monsters",
+      "label": "Monsters",
+      "system": "cnc",
+      "path": "./packs/monsters.db",
+      "entity": "Actor"
+    },
+    {
       "name": "items",
       "label": "Items (PHB)",
       "system": "cnc",
@@ -45,6 +52,13 @@
       "label": "Racial Features (PHB)",
       "system": "cnc",
       "path": "./packs/races.db",
+      "entity": "Item"
+    },
+    {
+      "name": "monsterfeatures",
+      "label": "Monster Features",
+      "system": "cnc",
+      "path": "./packs/monsterfeatures.db",
       "entity": "Item"
     },
     {
