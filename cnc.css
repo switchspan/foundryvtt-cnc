@@ -94,7 +94,7 @@
   /* Tags */
 }
 .cnc .window-content {
-  background: url("ui/parchment.jpg") repeat;
+  background-color: white;
   font-size: 13px;
   color: #191813;
 }
@@ -244,7 +244,7 @@
 .cnc.sheet .window-content {
   overflow-y: hidden;
   padding: 5px;
-  background: url("ui/parchment.jpg") repeat;
+  background-color: white;
   font-size: 13px;
   color: #191813;
 }
@@ -1390,7 +1390,7 @@
 .cnc.sheet.actor.character .sheet-header img.logo {
   flex: 0  0 160px;
   max-width: 160px;
-  content: url("ui/cnc_logo_charactersheet.jpg");
+  content: url("ui/cnc_logo_charactersheet.png");
 }
 .cnc.sheet.actor.character .sheet-header .charlevel {
   flex: 0 0 20px;
