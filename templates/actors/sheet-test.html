@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../../cnc.css">
+    <script type="text/javascript" src="http://livejs.com/live.js"></script>
 </head>
 <body>
 <div id="actor-ljaUyh87AXNhBsuw" class="app window-app cnc sheet actor character" data-appid="26" style="z-index: 100; width: 720px; height: 680px; left: 408px; top: 21px;">
@@ -18,13 +19,15 @@
         <form class="editable flexcol" autocomplete="off">
 
             <header class="sheet-header flexrow">
-                <img class="logo" title="Castles &amp; Crusades" data-edit="img">
+
                 <img class="profile" src="icons/svg/mystery-man.svg" title="Test" data-edit="img">
 
                 <section class="header-details flexrow">
                     <h1 class="charname">
-                        <input name="name" type="text" value="Test" placeholder="Character Name">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name">
                     </h1>
+
+                    <img class="logo" title="Castles &amp; Crusades" data-edit="img">
 
                     <aside class="header-exp flexcol">
                         <div class="charlevel">
