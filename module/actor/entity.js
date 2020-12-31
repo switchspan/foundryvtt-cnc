@@ -538,12 +538,9 @@ export default class ActorCnc extends Actor {
     // Determine the encumbrance size class
     let mod =
       {
-        tiny: 0.5,
         sm: 1,
         med: 1,
         lg: 2,
-        huge: 4,
-        grg: 8,
       }[actorData.data.traits.size] || 1;
     if (this.getFlag("cnc", "powerfulBuild")) mod = Math.min(mod * 2, 8);
 
