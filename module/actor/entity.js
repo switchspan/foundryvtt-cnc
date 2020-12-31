@@ -535,7 +535,7 @@ export default class ActorCnc extends Actor {
       weight += numCoins / CONFIG.CNC.encumbrance.currencyPerWeight;
     }
 
-    // Determine the encumbrance size class
+    // Determine the encumbrance size class (changed to M&T sizes)
     let mod =
       {
         sm: 1,
