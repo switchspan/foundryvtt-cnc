@@ -535,15 +535,12 @@ export default class ActorCnc extends Actor {
       weight += numCoins / CONFIG.CNC.encumbrance.currencyPerWeight;
     }
 
-    // Determine the encumbrance size class
+    // Determine the encumbrance size class (changed to M&T sizes)
     let mod =
       {
-        tiny: 0.5,
         sm: 1,
         med: 1,
         lg: 2,
-        huge: 4,
-        grg: 8,
       }[actorData.data.traits.size] || 1;
     if (this.getFlag("cnc", "powerfulBuild")) mod = Math.min(mod * 2, 8);
 

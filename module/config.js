@@ -139,21 +139,15 @@ CNC.abilityConsumptionTypes = {
 
 // Creature Sizes
 CNC.actorSizes = {
-  tiny: "CNC.SizeTiny",
   sm: "CNC.SizeSmall",
   med: "CNC.SizeMedium",
   lg: "CNC.SizeLarge",
-  huge: "CNC.SizeHuge",
-  grg: "CNC.SizeGargantuan",
 };
 
 CNC.tokenSizes = {
-  tiny: 1,
   sm: 1,
   med: 1,
   lg: 2,
-  huge: 3,
-  grg: 4,
 };
 
 /* -------------------------------------------- */
