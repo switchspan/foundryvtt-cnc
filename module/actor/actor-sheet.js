@@ -7,7 +7,7 @@ export class CncActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["foundryvtt-cnc", "sheet", "actor"],
+      classes: ["cnc", "sheet", "actor"],
       template: "systems/foundryvtt-cnc/templates/actor/actor-sheet.html",
       width: 600,
       height: 600,

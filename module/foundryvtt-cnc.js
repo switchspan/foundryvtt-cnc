@@ -6,7 +6,7 @@ import { CncItemSheet } from "./item/item-sheet.js";
 
 Hooks.once('init', async function() {
 
-  game.foundryvtt-cnc = {
+  game.cnc = {
     CncActor,
     CncItem
   };
@@ -26,9 +26,9 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("foundryvtt-cnc", CncActorSheet, { makeDefault: true });
+  Actors.registerSheet("cnc", CncActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("foundryvtt-cnc", CncItemSheet, { makeDefault: true });
+  Items.registerSheet("cnc", CncItemSheet, { makeDefault: true });
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function() {
