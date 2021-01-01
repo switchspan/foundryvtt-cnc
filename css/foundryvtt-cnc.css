@@ -145,6 +145,8 @@
   flex: 0 0 100px;
   height: 100px;
   margin-right: 10px;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
 }
 
 .foundryvtt-cnc .sheet-header .header-fields {
