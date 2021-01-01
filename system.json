@@ -2,7 +2,7 @@
   "name": "foundryvtt-cnc",
   "title": "Castles & Crusades",
   "description": "The Castles &amp; Crusades system from Troll Lord Games",
-  "version": "0.0.23-alpha.0",
+  "version": "0.0.23-alpha.1",
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.7.9",
   "templateVersion": 2,
