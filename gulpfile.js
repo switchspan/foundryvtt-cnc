@@ -1,52 +1,50 @@
-const gulp = require("gulp");
-const less = require("gulp-less");
-const bump = require("gulp-bump");
-const jsonModify = require("gulp-json-modify");
-const pkg = require("./package.json");
+const gulp = require('gulp');
+const prefix = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
+const sass = require('gulp-sass');
 
 /* ----------------------------------------- */
-/*  Compile LESS
+/*  Compile Sass
 /* ----------------------------------------- */
 
-const CNC_LESS = ["less/*.less"];
-function compileLESS() {
-  return gulp.src("less/cnc.less").pipe(less()).pipe(gulp.dest("./"));
+// Small error handler helper function.
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
 }
-const css = gulp.series(compileLESS);
 
-/* ----------------------------------------- */
-/*  Bump version number
-/* ----------------------------------------- */
-gulp.task("bump", function () {
-  let options = {};
-  options.version = pkg.version;
-  let downloadFilePath = `https://github.com/switchspan/foundryvtt-cnc/archive/v${pkg.version}.zip`;
-
-  return gulp
-    .src(["./system.json"])
-    .pipe(bump(options))
-    .pipe(jsonModify({ key: "download", value: downloadFilePath }))
-    .pipe(gulp.dest("./"));
-});
-
-/* ----------------------------------------- */
-/*  Bump version number in the download file
-/* ----------------------------------------- */
-gulp.task("bump-download", function () {
-  return gulp.src("./system.json");
-});
+const SYSTEM_SCSS = ["scss/**/*.scss"];
+function compileScss() {
+  // Configure options for sass output. For example, 'expanded' or 'nested'
+  let options = {
+    outputStyle: 'expanded'
+  };
+  return gulp.src(SYSTEM_SCSS)
+    .pipe(
+      sass(options)
+        .on('error', handleError)
+    )
+    .pipe(prefix({
+      cascade: false
+    }))
+    .pipe(gulp.dest("./css"))
+}
+const css = gulp.series(compileScss);
 
 /* ----------------------------------------- */
 /*  Watch Updates
 /* ----------------------------------------- */
 
 function watchUpdates() {
-  gulp.watch(CNC_LESS, css);
+  gulp.watch(SYSTEM_SCSS, css);
 }
 
 /* ----------------------------------------- */
 /*  Export Tasks
 /* ----------------------------------------- */
 
-exports.default = gulp.series(gulp.parallel(css), watchUpdates);
+exports.default = gulp.series(
+  compileScss,
+  watchUpdates
+);
 exports.css = css;

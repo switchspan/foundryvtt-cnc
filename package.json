@@ -1,36 +1,23 @@
 {
-  "name": "cnc",
-  "version": "0.0.23",
-  "description": "Castles and Crusades RPG Support for Foundry VTT",
-  "keywords": [
-    "FoundryVTT",
-    "CNC",
-    "Castles and Crusades"
-  ],
-  "homepage": "https://github.com/switchspan/foundryvtt-cnc#readme",
-  "bugs": {
-    "url": "https://github.com/switchspan/foundryvtt-cnc/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/switchspan/foundryvtt-cnc.git"
-  },
-  "license": "MIT",
-  "author": "Ken Taylor <taylor.kenneth@gmail.com>",
-  "main": "cnc.js",
+  "name": "foundryvtt-cnc",
+  "version": "1.0.0",
+  "description": "CSS compiler for the Castles &amp; Crusades system",
   "scripts": {
-    "build": "gulp css",
-    "build:watch": "gulp",
-    "preversion": "npm run build",
-    "version": "gulp bump && git add system.json && git add package.json && git add cnc.js && git add cnc.css",
-    "postversion": "git push && git push --tags"
+    "build": "gulp",
+    "compile": "gulp css",
+    "watch": "gulp",
+    "gulp": "gulp"
   },
-  "devDependencies": {
+  "browserslist": [
+    "last 3 versions"
+  ],
+  "author": "Ken Taylor",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
     "gulp": "^4.0.2",
-    "gulp-bump": "^3.2.0",
-    "gulp-json-modify": "^1.0.2",
-    "gulp-less": "^4.0.1",
-    "json-bump": "^1.0.2",
-    "prettier": "2.2.1"
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5"
   }
 }

@@ -1,74 +1,16 @@
 {
-  "name": "cnc",
-  "title": "Castles & Crusades",
-  "description": "Castles & Crusades from Troll Lord Games",
-  "version": "0.0.23",
+  "name": "foundryvtt-cnc",
+  "title": "Castles &amp; Crusades",
+  "description": "The Castles &amp; Crusades system from Troll Lord Games",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.7.9",
+  "templateVersion": 2,
   "author": "Ken Taylor",
+  "esmodules": ["module/foundryvtt-cnc.js"],
+  "styles": ["css/foundryvtt-cnc.css"],
   "scripts": [],
-  "esmodules": [
-    "cnc.js"
-  ],
-  "styles": [
-    "cnc.css"
-  ],
-  "packs": [
-    {
-      "name": "monsters",
-      "label": "Monsters",
-      "system": "cnc",
-      "path": "./packs/monsters.db",
-      "entity": "Actor"
-    },
-    {
-      "name": "items",
-      "label": "Items (PHB)",
-      "system": "cnc",
-      "path": "./packs/items.db",
-      "entity": "Item"
-    },
-    {
-      "name": "spells",
-      "label": "Spells (PHB)",
-      "system": "cnc",
-      "path": "./packs/spells.db",
-      "entity": "Item"
-    },
-    {
-      "name": "classes",
-      "label": "Classes (PHB)",
-      "system": "cnc",
-      "path": "./packs/classes.db",
-      "entity": "Item"
-    },
-    {
-      "name": "classfeatures",
-      "label": "Class Features (PHB)",
-      "system": "cnc",
-      "path": "./packs/classfeatures.db",
-      "entity": "Item"
-    },
-    {
-      "name": "races",
-      "label": "Racial Features (PHB)",
-      "system": "cnc",
-      "path": "./packs/races.db",
-      "entity": "Item"
-    },
-    {
-      "name": "monsterfeatures",
-      "label": "Monster Features",
-      "system": "cnc",
-      "path": "./packs/monsterfeatures.db",
-      "entity": "Item"
-    },
-    {
-      "name": "rules",
-      "label": "Rules (PHB)",
-      "system": "cnc",
-      "path": "./packs/rules.db",
-      "entity": "JournalEntry"
-    }
-  ],
+  "packs": [],
   "languages": [
     {
       "lang": "en",
@@ -76,14 +18,12 @@
       "path": "lang/en.json"
     }
   ],
-  "socket": true,
   "gridDistance": 5,
   "gridUnits": "ft",
-  "primaryTokenAttribute": "attributes.hp",
-  "secondaryTokenAttribute": null,
-  "minimumCoreVersion": "0.7.6",
-  "compatibleCoreVersion": "0.7.9",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "power",
   "url": "https://github.com/switchspan/foundryvtt-cnc",
   "manifest": "https://raw.githubusercontent.com/switchspan/foundryvtt-cnc/main/system.json",
-  "download": "https://github.com/switchspan/foundryvtt-cnc/archive/v0.0.23.zip"
+  "download": "https://github.com/switchspan/foundryvtt-cnc/archive/v1.0.0.zip",
+  "license": "LICENSE.txt"
 }
