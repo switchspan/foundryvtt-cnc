@@ -1,5 +1,5 @@
 {
-  "name": "foundryvtt-cnc",
+  "name": "cnc",
   "version": "1.0.0",
   "description": "CSS compiler for the Castles &amp; Crusades system",
   "scripts": {

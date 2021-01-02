@@ -7,7 +7,7 @@ export class CncItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["foundryvtt-cnc", "sheet", "item"],
+      classes: ["cnc", "sheet", "item"],
       width: 520,
       height: 480,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -16,7 +16,7 @@ export class CncItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/foundryvtt-cnc/templates/item";
+    const path = "systems/cnc/templates/item";
     // Return a single sheet for all item types.
     return `${path}/item-sheet.html`;
     // Alternatively, you could use the following return statement to do a
