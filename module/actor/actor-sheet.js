@@ -8,9 +8,9 @@ export class CncActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["cnc", "sheet", "actor"],
-      template: "systems/cnc/templates/actor/actor-sheet.html",
-      width: 600,
-      height: 600,
+      template: "systems/cnc/templates/actor/actor-sheet.hbs",
+      width: 800,
+      height: 700,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
