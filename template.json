@@ -52,15 +52,15 @@
       "templates": [
         "common"
       ],
+      "xp": {
+        "value": 0,
+        "min": 0,
+        "max": 2001
+      },
       "details": {
         "description": "",
         "personality": "",
-        "background": "",
-        "xp": {
-          "value": 0,
-          "min": 0,
-          "max": 2001
-        },
+        "background": ""
       }
     },
     "npc": {
