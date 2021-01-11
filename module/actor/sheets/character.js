@@ -2,13 +2,13 @@
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class CncActorSheet extends ActorSheet {
+export class CncActorSheetCharacter extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["cnc", "sheet", "actor"],
-      template: "systems/cnc/templates/actor/actor-sheet.hbs",
+      template: "systems/cnc/templates/actors/character-sheet.hbs",
       width: 800,
       height: 700,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]

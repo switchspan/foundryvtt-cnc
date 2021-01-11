@@ -1,10 +1,12 @@
-// Import Modules
+// Import Entities
 import { CncActor } from "./actor/actor.js";
-import { CncActorSheet } from "./actor/actor-sheet.js";
 import { CncItem } from "./item/item.js";
+
+// Import Applications
+import { CncActorSheetCharacter } from "./actor/sheets/character.js";
 import { CncItemSheet } from "./item/item-sheet.js";
 
-Hooks.once('init', async function() {
+Hooks.once('init', async function () {
 
   game.cnc = {
     CncActor,
@@ -26,12 +28,12 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("cnc", CncActorSheet, { makeDefault: true });
+  Actors.registerSheet("cnc", CncActorSheetCharacter, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("cnc", CncItemSheet, { makeDefault: true });
 
   // If you need to add Handlebars helpers, here are a few useful examples:
-  Handlebars.registerHelper('concat', function() {
+  Handlebars.registerHelper('concat', function () {
     var outStr = '';
     for (var arg in arguments) {
       if (typeof arguments[arg] != 'object') {
@@ -41,7 +43,7 @@ Hooks.once('init', async function() {
     return outStr;
   });
 
-  Handlebars.registerHelper('toLowerCase', function(str) {
+  Handlebars.registerHelper('toLowerCase', function (str) {
     return str.toLowerCase();
   });
 });
