@@ -1,12 +1,20 @@
+// Config settings
+import { CNC } from "./config.js";
+
 // Import Entities
 import { CncActor } from "./actor/actor.js";
 import { CncItem } from "./item/item.js";
+
+// Preload Templates
+import { preloadHandlebarsTemplates } from "./module/templates.js";
 
 // Import Applications
 import { CncActorSheetCharacter } from "./actor/sheets/character.js";
 import { CncItemSheet } from "./item/item-sheet.js";
 
 Hooks.once('init', async function () {
+  console.log('CnC | Initializing the Castles & Crusades Game System');
+  // console.log(`${CNC.ASCII}`);
 
   game.cnc = {
     CncActor,
@@ -46,4 +54,7 @@ Hooks.once('init', async function () {
   Handlebars.registerHelper('toLowerCase', function (str) {
     return str.toLowerCase();
   });
+
+  // Preload Handlebars Templates
+  preloadHandlebarsTemplates();
 });
