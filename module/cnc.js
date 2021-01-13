@@ -6,15 +6,14 @@ import { CncActor } from "./actor/actor.js";
 import { CncItem } from "./item/item.js";
 
 // Preload Templates
-import { preloadHandlebarsTemplates } from "./module/templates.js";
+import { preloadHandlebarsTemplates } from "./templates.js";
 
 // Import Applications
 import { CncActorSheetCharacter } from "./actor/sheets/character.js";
 import { CncItemSheet } from "./item/item-sheet.js";
 
 Hooks.once('init', async function () {
-  console.log('CnC | Initializing the Castles & Crusades Game System');
-  // console.log(`${CNC.ASCII}`);
+  console.log(`CnC | Initializing the Castles & Crusades Game System\n${CNC.ASCII}`);
 
   game.cnc = {
     CncActor,
