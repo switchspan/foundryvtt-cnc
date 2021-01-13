@@ -4,14 +4,14 @@
 
   {{!-- Ability Scores --}}
   <ul class="ability-scores ability-score-row">
-    {{#each data.abilities as |ability id|}}
+    {{#each data.attributes as |attribute id|}}
     <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
       <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-      <input class="ability-score" name="data.abilities.{{id}}.value" type="text" value="{{ability.value}}"
+      <input class="ability-score" name="data.attribute.{{id}}.value" type="text" value="{{attribute.value}}"
         data-dtype="Number" placeholder="10" />
       <div class="ability-modifiers flexrow">
-        <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}"
+        <span class="ability-mod" title="Modifier">{{numberFormat attribute.mod decimals=0 sign=true}}</span>
+        <input type="hidden" name="data.attribute.{{id}}.proficient" value="{{attribute.proficient}}"
           data-dtype="Number" />
         <a class="proficiency-toggle ability-proficiency"
           title="{{ localize 'CNC.Proficiency' }}">{{{ability.icon}}}</a>
@@ -98,16 +98,16 @@
             <ol class="inventory-list items-list">
 
               {{!-- Actions --}}
-              {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs" items=actionsData.action label=(localize "CNC.Action") }}
+              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs" items=actionsData.action label=(localize "CNC.Action") }} --}}
 
               {{!-- Bonus Actions --}}
-              {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs" items=actionsData.bonus label=(localize "CNC.BonusAction") }}
+              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs" items=actionsData.bonus label=(localize "CNC.BonusAction") }} --}}
 
               {{!-- Reactions --}}
-              {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs"  items=actionsData.reaction label=(localize "CNC.Reaction") }}
+              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs"  items=actionsData.reaction label=(localize "CNC.Reaction") }} --}}
 
               {{!-- Special --}}
-              {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs"  items=actionsData.special label=(localize "CNC.Special") }}
+              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs"  items=actionsData.special label=(localize "CNC.Special") }} --}}
 
             </ol>
           </div>
@@ -119,17 +119,17 @@
 
           {{!-- Inventory Tab --}}
           <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "systems/cnc/templates/parts/actor-inventory.hbs" sections=inventory}}
+            {{> "systems/cnc/templates/actors/parts/actor-inventory.hbs" sections=inventory}}
           </div>
 
           {{!-- Features Tab --}}
           <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/cnc/templates/parts/actor-features.hbs" sections=features}}
+            {{> "systems/cnc/templates/actors/parts/actor-features.hbs" sections=features}}
           </div>
 
           {{!-- Effects Tab --}}
           <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{>  "systems/cnc/templates/actors/parts/active-effects.html"}}
+            {{!-- {{>  "systems/cnc/templates/actors/parts/active-effects.html"}} --}}
           </div>
 
           {{!-- Biography Tab --}}

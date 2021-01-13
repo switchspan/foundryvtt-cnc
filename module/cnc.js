@@ -54,6 +54,10 @@ Hooks.once('init', async function () {
     return str.toLowerCase();
   });
 
+  Handlebars.registerHelper('cnc-add', (value, toAdd) => {
+    return new Handlebars.SafeString(String(value + toAdd));
+  });
+
   // Preload Handlebars Templates
   preloadHandlebarsTemplates();
 });
