@@ -10,10 +10,11 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 
 // Import Applications
 import { CncActorSheetCharacter } from "./actor/sheets/character.js";
-import { CncItemSheet } from "./item/item-sheet.js";
+import { CncItemSheetClass } from "./item/sheets/class.js";
+//import { CncItemSheet } from "./item/item-sheet.js";
 
 Hooks.once('init', async function () {
-  console.log(`CnC | Initializing the Castles & Crusades Game System\n${CNC.ASCII}`);
+  console.log(`TLG | Initializing the Castles & Crusades Game System\n${CNC.ASCII}`);
 
   game.cnc = {
     CncActor,
@@ -37,7 +38,7 @@ Hooks.once('init', async function () {
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("cnc", CncActorSheetCharacter, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("cnc", CncItemSheet, { makeDefault: true });
+  Items.registerSheet("cnc", CncItemSheetClass, { makeDefault: true });
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function () {
@@ -60,4 +61,7 @@ Hooks.once('init', async function () {
 
   // Preload Handlebars Templates
   preloadHandlebarsTemplates();
+
+  // Crack open a Dr. Pepper
+  console.log(`TLG | Cracking open Dr. Pepper`);
 });

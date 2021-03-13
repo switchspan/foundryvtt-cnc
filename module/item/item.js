@@ -11,6 +11,10 @@ export class CncItem extends Item {
 
     // Get the Item's data
     const itemData = this.data;
+
+    console.log(`TLG | Preparing item data`);
+    console.log(itemData)
+
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
   }
