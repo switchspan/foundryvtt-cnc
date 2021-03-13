@@ -2,18 +2,16 @@
 export const CNC = {};
 
 // ASCII Artwork
-CNC.ASCII = ` ____            ____ 
-/ ___|  _ __    / ___|
-| |     | '_ \\  | |    
-| |___  | | | | | |___ 
-\\_____| |_| |_| \\____|
-=======================`;
+CNC.ASCII = ` ___           _  _   _                _   ___                       
+|_ _|_ _  ___ | || | | |   ___  _ _  _| | /  _>  ___ ._ _ _  ___  ___
+ | || '_>/ . \\| || | | |_ / . \\| '_>/ . | | <_/\\<_> || ' ' |/ ._><_-<
+ |_||_|  \\___/|_||_| |___|\\___/|_|  \\___| \`____/<___||_|_|_|\\___./__/`;
 
 /**
  * The set of Ability Scores used within the system
  * @type {Object}
  */
-CNC.abilities = {
+CNC.attributes = {
     "str": "CNC.AbilityStr",
     "dex": "CNC.AbilityDex",
     "con": "CNC.AbilityCon",
@@ -21,8 +19,8 @@ CNC.abilities = {
     "wis": "CNC.AbilityWis",
     "cha": "CNC.AbilityCha"
   };
-  
-CNC.abilityAbbreviations = {
+
+CNC.attributeAbbreviations = {
 "str": "CNC.AbilityStrAbbr",
 "dex": "CNC.AbilityDexAbbr",
 "con": "CNC.AbilityConAbbr",
@@ -30,7 +28,7 @@ CNC.abilityAbbreviations = {
 "wis": "CNC.AbilityWisAbbr",
 "cha": "CNC.AbilityChaAbbr"
 };
-  
+
 /* -------------------------------------------- */
 
 /**
