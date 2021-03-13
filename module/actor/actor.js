@@ -16,15 +16,29 @@ export class CncActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if (actorData.type === 'character') this._prepareCharacterData(actorData);
+    switch (actorData.type) {
+      case 'character':
+        this._prepareCharacterData(actorData);
+        break;
+      case 'npc':
+        this._prepareNpcData(actorData)
+        break;
+      default:
+        break;
+    }
+
   }
 
   /**
    * Prepare Character type specific data
+   * @param actorData
+   * @private
    */
   _prepareCharacterData(actorData) {
     const data = actorData.data;
 
+    console.log(`TLG | Preparing character data`);
+    console.log(actorData);
     // Make modifications to data here. For example:
 
     // Loop through ability scores, and add their modifiers to our sheet output.
@@ -32,6 +46,18 @@ export class CncActor extends Actor {
       // Calculate the modifier using d20 rules.
       attribute.mod = Math.floor((attribute.value - 10) / 2);
     }
+  }
+
+  /**
+   * Prepare NPC type specific data
+   * @param actorData
+   * @private
+   */
+  _prepareNpcData(actorData) {
+    const data = actorData.data;
+
+    console.log(`TLG | Preparing npc data`);
+    // Make modifications to data here.
   }
 
 }
