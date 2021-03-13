@@ -45,6 +45,12 @@
         "movement": {
           "distance": 30,
           "units": "ft"
+        },
+        "coin": {
+          "pp": 0,
+          "gp": 0,
+          "sp": 0,
+          "cp": 0
         }
       }
     },
@@ -96,10 +102,10 @@
       "hitDice": "d6",
       "hitDiceUsed": 0,
       "bonusToHit": 0,
-      "experiencePointProgression": 0,
+      "experiencePointProgression": [],
       "alignment": "",
-      "weapons": "",
-      "armor": "",
+      "weapons": [],
+      "armor": [],
       "abilities": [],
       "spellcasting": "none"
     },
