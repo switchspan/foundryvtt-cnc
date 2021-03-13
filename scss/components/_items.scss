@@ -6,6 +6,29 @@
 
   .item-header {
     font-weight: bold;
+    img.profile {
+      border: 2px solid #000;
+    }
+
+    .item-subtitle {
+      flex: 0 0 100px;
+      height: 60px;
+      margin: 0;
+      padding: 5px;
+      text-align: right;
+      color: $c-tan;
+
+      .item-type {
+        font-size: 24px;
+        line-height: 26px;
+        margin: 0;
+      }
+
+      .item-status {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
   }
 
   .item {

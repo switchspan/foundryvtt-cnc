@@ -10,6 +10,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-bottom: 10px;
+  background: $background-sheet;
 
   .profile-img {
     flex: 0 0 100px;
@@ -23,7 +24,7 @@
 
   h1.charname {
     height: 50px;
-    padding: 0px;
+    padding: 0;
     margin: 5px 0;
     border-bottom: 0;
     input {
