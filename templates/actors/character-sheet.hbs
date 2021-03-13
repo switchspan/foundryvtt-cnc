@@ -4,14 +4,14 @@
 
   {{!-- Ability Scores --}}
   <ul class="ability-scores ability-score-row">
-    {{#each data.attributes as |attribute id|}}
-    <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+    {{#each actor.data.attributes as |attributes id|}}
+    <li class="ability" data-ability="{{id}}">
       <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-      <input class="ability-score" name="data.attribute.{{id}}.value" type="text" value="{{attribute.value}}"
+      <input class="ability-score" name="data.attributes.{{id}}.value" type="text" value="{{attributes.value}}"
         data-dtype="Number" placeholder="10" />
       <div class="ability-modifiers flexrow">
-        <span class="ability-mod" title="Modifier">{{numberFormat attribute.mod decimals=0 sign=true}}</span>
-        <input type="hidden" name="data.attribute.{{id}}.proficient" value="{{attribute.proficient}}"
+        <span class="ability-mod" title="Modifier">{{numberFormat attributes.mod decimals=0 sign=true}}</span>
+        <input type="hidden" name="data.attributes.{{id}}.proficient" value="{{attributes.primary}}"
           data-dtype="Number" />
         <a class="proficiency-toggle ability-proficiency"
           title="{{ localize 'CNC.Proficiency' }}">{{{ability.icon}}}</a>
