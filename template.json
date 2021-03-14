@@ -81,7 +81,8 @@
   "Item": {
     "types": [
       "class",
-      "race"
+      "race",
+      "spell"
     ],
     "templates": {
       "itemDescription": {
@@ -119,13 +120,23 @@
       "abilities": [],
       "languages": [],
       "size": "medium",
-      "movement": {
-        "distance": 30,
-        "units": "ft"
-      },
+      "movement": 30,
       "typicalClasses": [],
       "attributeModifiers": [],
       "classModifers": []
+    },
+    "spell": {
+      "templates": [
+        "itemDescription"
+      ],
+      "range": 0,
+      "casterAndSpellLevel": [],
+      "castingTime": 0,
+      "targetAreaOfEffect": "",
+      "duration": "",
+      "savingThrow": "",
+      "spellResistance": "",
+      "components": ""
     }
   }
 }
