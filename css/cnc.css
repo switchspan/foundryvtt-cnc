@@ -168,8 +168,8 @@
 }
 .cnc .tabs {
   height: 40px;
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
 }
 .cnc .tabs .item {
   line-height: 40px;
@@ -212,7 +212,7 @@
   height: 30px;
   line-height: 24px;
   padding: 3px 0;
-  border-bottom: 1px solid #BBB;
+  border-bottom: 1px solid #bbb;
 }
 .cnc .items-list .item .item-image {
   flex: 0 0 24px;
