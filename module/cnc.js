@@ -1,6 +1,9 @@
 // Config settings
 import { CNC } from "./config.js";
 
+// Game system settings
+import { registerSystemSettings } from "./settings.js";
+
 // Import Entities
 import { CncActor } from "./actor/actor.js";
 import { CncItem } from "./item/item.js";
@@ -16,15 +19,27 @@ import { CncItemSheetClass } from "./item/sheets/class.js";
 Hooks.once('init', async function () {
   console.log(`TLG | Initializing the Castles & Crusades Game System\n${CNC.ASCII}`);
 
+  // Registering system settings
+  registerSystemSettings();
+
+  // Create a namespace within the game global
   game.cnc = {
-    CncActor,
-    CncItem
+    entities: {
+      CncActor,
+      CncItem
+    },
+    config: CNC
   };
+
+  // Record Configuration Values
+  CONFIG.CNC = CNC;
+  //CONFIG.time.roundTime = 6;
 
   /**
    * Set an initiative formula for the system
    * @type {String}
    */
+  //TODO: check initiative formula for CNC
   CONFIG.Combat.initiative = {
     formula: "1d10",
     decimals: 2
