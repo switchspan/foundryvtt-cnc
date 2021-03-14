@@ -35,6 +35,19 @@
   }
 }
 
+.classname {
+  height: 50px;
+  padding: 0;
+  margin: 5px 0;
+  border-bottom: 0;
+  input {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+  }
+}
+
 .sheet-tabs {
   flex: 0;
 }
