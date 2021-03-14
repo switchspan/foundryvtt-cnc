@@ -129,7 +129,7 @@
       "templates": [
         "itemDescription"
       ],
-      "range": 0,
+      "range": "",
       "casterAndSpellLevel": [],
       "castingTime": 0,
       "targetAreaOfEffect": "",

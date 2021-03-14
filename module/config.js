@@ -50,3 +50,5 @@ CNC.alignments = {
 /* -------------------------------------------- */
 
 CNC.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
+
+CNC.spellDurationUnits = ["rounds", "hours", "days", "weeks", "months", "years"];
