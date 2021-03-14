@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "CSS compiler for the Castles &amp; Crusades system",
   "scripts": {
-    "build": "gulp",
-    "compile": "gulp css",
-    "watch": "gulp",
-    "gulp": "gulp"
+    "compile": "npx sass scss/:css --no-source-map",
+    "watch": "npx sass scss/:css --no-source-map --watch"
   },
   "browserslist": [
     "last 3 versions"
@@ -15,9 +13,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5"
+    "sass": "^1.32.8"
   }
 }
