@@ -31,6 +31,11 @@ export class CncItemSheetClass extends ItemSheet {
     /** @override */
     getData() {
         const data = super.getData();
+        data.config = CONFIG.CNC;
+        console.log("TLG | Item sheet data: ");
+        console.log(data);
+        let canMulticlass = game.settings.get("cnc", "multiClassingEnabled");
+        console.log(`TLG | Multi-classing enabled: ${canMulticlass}`);
         return data;
     }
 
