@@ -12,21 +12,21 @@ CNC.ASCII = ` ___           _  _   _                _   ___
  * @type {Object}
  */
 CNC.attributes = {
-    "str": "CNC.AbilityStr",
-    "dex": "CNC.AbilityDex",
-    "con": "CNC.AbilityCon",
-    "int": "CNC.AbilityInt",
-    "wis": "CNC.AbilityWis",
-    "cha": "CNC.AbilityCha"
-  };
+  "str": "CNC.AbilityStr",
+  "dex": "CNC.AbilityDex",
+  "con": "CNC.AbilityCon",
+  "int": "CNC.AbilityInt",
+  "wis": "CNC.AbilityWis",
+  "cha": "CNC.AbilityCha"
+};
 
 CNC.attributeAbbreviations = {
-"str": "CNC.AbilityStrAbbr",
-"dex": "CNC.AbilityDexAbbr",
-"con": "CNC.AbilityConAbbr",
-"int": "CNC.AbilityIntAbbr",
-"wis": "CNC.AbilityWisAbbr",
-"cha": "CNC.AbilityChaAbbr"
+  "str": "CNC.AbilityStrAbbr",
+  "dex": "CNC.AbilityDexAbbr",
+  "con": "CNC.AbilityConAbbr",
+  "int": "CNC.AbilityIntAbbr",
+  "wis": "CNC.AbilityWisAbbr",
+  "cha": "CNC.AbilityChaAbbr"
 };
 
 /* -------------------------------------------- */
@@ -36,15 +36,15 @@ CNC.attributeAbbreviations = {
  * @type {Object}
  */
 CNC.alignments = {
-'lg': "CNC.AlignmentLG",
-'ng': "CNC.AlignmentNG",
-'cg': "CNC.AlignmentCG",
-'ln': "CNC.AlignmentLN",
-'tn': "CNC.AlignmentTN",
-'cn': "CNC.AlignmentCN",
-'le': "CNC.AlignmentLE",
-'ne': "CNC.AlignmentNE",
-'ce': "CNC.AlignmentCE"
+  'lg': "CNC.AlignmentLG",
+  'ng': "CNC.AlignmentNG",
+  'cg': "CNC.AlignmentCG",
+  'ln': "CNC.AlignmentLN",
+  'tn': "CNC.AlignmentTN",
+  'cn': "CNC.AlignmentCN",
+  'le': "CNC.AlignmentLE",
+  'ne': "CNC.AlignmentNE",
+  'ce': "CNC.AlignmentCE"
 };
 
 /* -------------------------------------------- */
