@@ -13,7 +13,7 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 
 // Import Applications
 import { CncActorSheetCharacter } from "./actor/sheets/character.js";
-import { CncItemSheetClass } from "./item/sheets/class.js";
+import { CncItemSheet } from "./item/item-sheet.js";
 //import { CncItemSheet } from "./item/item-sheet.js";
 
 Hooks.once('init', async function () {
@@ -51,9 +51,9 @@ Hooks.once('init', async function () {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("cnc", CncActorSheetCharacter, { makeDefault: true });
+  Actors.registerSheet("cnc", CncActorSheetCharacter, { makeDefault: true, label: "CNC.SheetClassCharacter" });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("cnc", CncItemSheetClass, { makeDefault: true });
+  Items.registerSheet("cnc", CncItemSheet, { makeDefault: true, label: "CNC.SheetClassItem" });
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function () {

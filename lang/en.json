@@ -1,19 +1,17 @@
 {
     "ACTOR": {
         "TypeCharacter": "Player Character",
-        "TypeNpc": "Non-Player Character",
-        "TypeVehicle": "Vehicle"
+        "TypeNpc": "Non-Player Character"
     },
     "ITEM": {
         "TypeBackpack": "Backpack",
         "TypeClass": "Class",
         "TypeConsumable": "Consumable",
         "TypeEquipment": "Equipment",
-        "TypeFeat": "Feature",
         "TypeLoot": "Loot",
         "TypeSpell": "Spell",
-        "TypeTool": "Tool",
-        "TypeWeapon": "Weapon"
+        "TypeWeapon": "Weapon",
+        "TypeRace": "Race"
     },
     "SETTINGS": {
         "cncMultiClass": {
@@ -97,7 +95,6 @@
         "CriticalHit": "Critical Hit",
         "Currency": "Currency",
         "CurrencyCP": "Copper",
-        "CurrencyEP": "Electrum",
         "CurrencyGP": "Gold",
         "CurrencyPP": "Platinum",
         "CurrencySP": "Silver",
@@ -162,6 +159,8 @@
         "SaveDC": "DC {dc} {attribute}",
         "SavePromptTitle": "{attribute} Saving Throw",
         "Size": "Size",
+        "SizeGargantuan": "Gargantuan",      
+        "SizeHuge": "Huge",
         "SizeLarge": "Large",
         "SizeMedium": "Medium",
         "SizeSmall": "Small",

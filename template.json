@@ -86,11 +86,7 @@
     ],
     "templates": {
       "itemDescription": {
-        "description": {
-          "value": "",
-          "chat": "",
-          "unidentified": ""
-        },
+        "description": "",
         "source": ""
       }
     },

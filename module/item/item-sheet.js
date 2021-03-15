@@ -16,13 +16,14 @@ export class CncItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/cnc/templates/item";
+    console.log('TLG | template: ');
+    console.log(this.item.data.type);
+    const path = "systems/cnc/templates/items";
+    console.log(`${path}/${this.item.data.type}-sheet.hbs`);
     // Return a single sheet for all item types.
-    return `${path}/item-sheet.html`;
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
-
-    // return `${path}/${this.item.data.type}-sheet.html`;
+    return `${path}/${this.item.data.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -30,6 +31,11 @@ export class CncItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    data.config = CONFIG.CNC;
+    console.log("TLG | Item sheet data: ");
+    console.log(data);
+    let canMulticlass = game.settings.get("cnc", "multiClassingEnabled");
+    console.log(`TLG | Multi-classing enabled: ${canMulticlass}`);
     return data;
   }
 
