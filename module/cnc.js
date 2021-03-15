@@ -13,6 +13,7 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 
 // Import Applications
 import { CncActorSheetCharacter } from "./actor/sheets/character.js";
+import { CncActorSheetNPC } from "./actor/sheets/npc.js";
 import { CncItemSheet } from "./item/item-sheet.js";
 //import { CncItemSheet } from "./item/item-sheet.js";
 
@@ -51,7 +52,8 @@ Hooks.once('init', async function () {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("cnc", CncActorSheetCharacter, { makeDefault: true, label: "CNC.SheetClassCharacter" });
+  Actors.registerSheet("cnc", CncActorSheetCharacter, { types: ["character"], makeDefault: true, label: "CNC.SheetClassCharacter" });
+  Actors.registerSheet("dnd5e", CncActorSheetNPC, { types: ["npc"], makeDefault: true, label: "CNC.SheetClassNPC" });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("cnc", CncItemSheet, { makeDefault: true, label: "CNC.SheetClassItem" });
 
