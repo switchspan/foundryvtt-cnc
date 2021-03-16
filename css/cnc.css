@@ -122,6 +122,13 @@
   height: 100px;
   margin-right: 10px;
 }
+.cnc .sheet-header .profile {
+  border-right: none;
+  flex: 0 0 80px;
+  height: auto;
+  max-height: 80px;
+  max-width: 80px;
+}
 .cnc .sheet-header .header-fields {
   flex: 1;
 }

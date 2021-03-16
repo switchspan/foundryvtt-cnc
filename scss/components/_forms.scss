@@ -18,6 +18,14 @@
     margin-right: 10px;
   }
 
+  .profile {
+    border-right: none;
+    flex: 0 0 80px;
+    height: auto;
+    max-height: 80px;
+    max-width: 80px;
+  }
+
   .header-fields {
     flex: 1;
   }

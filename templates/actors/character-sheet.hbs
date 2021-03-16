@@ -1,178 +1,139 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<form class="{{cssClass}} flexcol cnc" autocomplete="off">
 
-  {{> "systems/cnc/templates/actors/parts/sheet-header.hbs" }}
-
-  {{!-- Ability Scores --}}
-  <ul class="ability-scores ability-score-row">
-    {{#each actor.data.attributes as |attributes id|}}
-    <li class="ability" data-ability="{{id}}">
-      <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-      <input class="ability-score" name="data.attributes.{{id}}.value" type="text" value="{{attributes.value}}"
-        data-dtype="Number" placeholder="10" />
-      <div class="ability-modifiers flexrow">
-        <span class="ability-mod" title="Modifier">{{numberFormat attributes.mod decimals=0 sign=true}}</span>
-        <input type="hidden" name="data.attributes.{{id}}.proficient" value="{{attributes.primary}}"
-          data-dtype="Number" />
-        <a class="proficiency-toggle ability-proficiency"
-          title="{{ localize 'CNC.Proficiency' }}">{{{ability.icon}}}</a>
-        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
-      </div>
-    </li>
-    {{/each}}
-
-    <li class="attribute initiative">
-      <h4 class="attribute-name box-title rollable" data-action="rollInitiative">{{ localize "CNC.Initiative" }}</h4>
-      <div class="attribute-value">
-        <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
-      </div>
-      <footer class="attribute-footer">
-        <span>{{ localize "CNC.Modifier" }}</span>
-        <input name="data.attributes.init.value" type="text" placeholder="0" data-dtype="Number"
-          value="{{numberFormat data.attributes.init.value decimals=0 sign=true}}" />
-      </footer>
-    </li>
-
-    <li class="attribute movement">
-      <h4 class="attribute-name box-title">{{ localize "CNC.MovementWalk" }} ({{data.attributes.movement.units}})</h4>
-      <div class="attribute-value">
-        <span class="movement-primary" title="{{movement.primary}}">{{data.attributes.movement.walk}}</span>
-      </div>
-      <footer class="attribute-footer">
-        <span class="movement-special" title="{{movement.special}}">{{movement.special}}</span>
-      </footer>
-      <a class="configure-movement config-button" data-action="movement" title="{{localize 'CNC.MovementConfig'}}"><i
-          class="fas fa-cog"></i></a>
-    </li>
-  </ul>
-
-
-  <div class="sheet-main-wrapper">
-    {{> "systems/cnc/templates/actors/parts/sheet-sidebar.hbs"}}
-
-    <main class="sheet-main">
-
-      {{!-- Header Attributes --}}
-      <ul class="attributes">
-        {{#each resources as |res|}}
-        <li class="attribute resource">
-          <h4 class="attribute-name box-title">
-            <input name="data.resources.{{res.name}}.label" type="text" value="{{res.label}}"
-              placeholder="{{res.placeholder}}" />
-          </h4>
-          <div class="attribute-value">
-            <label class="recharge checkbox">
-              {{ localize "CNC.AbbreviationSR" }} <input name="data.resources.{{res.name}}.sr" type="checkbox"
-                {{checked res.sr}} />
-            </label>
-            <input name="data.resources.{{res.name}}.value" type="text" value="{{res.value}}" data-dtype="Number"
-              placeholder="0" />
-            <span class="sep"> / </span>
-            <input name="data.resources.{{res.name}}.max" type="text" value="{{res.max}}" data-dtype="Number"
-              placeholder="0" />
-            <label class="recharge checkbox">
-              {{ localize "CNC.AbbreviationLR" }} <input name="data.resources.{{res.name}}.lr" type="checkbox"
-                {{checked res.lr}} />
-            </label>
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+            use both the "grid" and "grid-Ncol" class where "N" can be any number
+            from 1 to 12 and will create that number of columns.  --}}
+            <div class="resources grid grid-2col">
+              {{!-- "flex-group-center" is also defined in the _grid.scss file
+              and it will add a small amount of padding, a border, and will
+              center all of its child elements content and text. --}}
+              <div class="resource flex-group-center">
+                  <label for="data.health.value" class="resource-label">Health</label>
+                  <div class="resource-content flexrow flex-center flex-between">
+                    <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
+                    <span> / </span>
+                    <input type="text" name="data.health.max" value="{{data.health.max}}" data-dtype="Number"/>
+                  </div>
+              </div>
+              <div class="resource flex-group-center">
+                  <label for="data.power.value" class="resource-label">Power</label>
+                  <div class="resource-content flexrow flex-center flex-between">
+                    <input type="text" name="data.power.value" value="{{data.power.value}}" data-dtype="Number"/>
+                    <span> / </span>
+                    <input type="text" name="data.power.max" value="{{data.power.max}}" data-dtype="Number"/>
+                  </div>
+              </div>
           </div>
-        </li>
-        {{/each}}
-      </ul>
+          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+          use both the "grid" and "grid-Ncol" class where "N" can be any number
+          from 1 to 12 and will create that number of columns.  --}}
+          <div class="abilities grid grid-3col">
+            {{#each data.abilities as |ability key|}}
+              <div class="ability flexrow flex-group-center">
+                <label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
+                <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{key}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+    </header>
 
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="items">Items</a>
+        <a class="item" data-tab="features">Features</a>
+        <a class="item" data-tab="spells">Spells</a>
+    </nav>
 
-      <div class="sheet-tab-area">
-        {{!-- NPC Sheet Navigation --}}
-        <nav class="sheet-navigation tabs" data-group="primary">
-          <a class="item active" data-tab="actions">{{ localize "CNC.ActionPl" }}</a>
-          <a class="item" data-tab="spellbook">{{ localize "CNC.Spellbook" }}</a>
-          <a class="item" data-tab="inventory">{{ localize "CNC.Inventory" }}</a>
-          <a class="item" data-tab="features">{{ localize "CNC.Features" }}</a>
-          <a class="item" data-tab="effects">{{ localize "CNC.Effects" }}</a>
-          <a class="item" data-tab="biography">{{ localize "CNC.Biography" }}</a>
-        </nav>
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
 
-        {{!-- NPC Sheet Body --}}
-        <section class="sheet-body">
+        {{!-- Biography Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="description">
+            {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+        </div>
 
-          {{!-- Actions Tab --}}
-          <div class="tab actions flexcol" data-group="primary" data-tab="actions">{{!-- Actions --}}
-            <ol class="inventory-list items-list">
-
-              {{!-- Actions --}}
-              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs" items=actionsData.action label=(localize "CNC.Action") }} --}}
-
-              {{!-- Bonus Actions --}}
-              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs" items=actionsData.bonus label=(localize "CNC.BonusAction") }} --}}
-
-              {{!-- Reactions --}}
-              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs"  items=actionsData.reaction label=(localize "CNC.Reaction") }} --}}
-
-              {{!-- Special --}}
-              {{!-- {{> "systems/cnc/templates/actors/parts/actor-actions-list.hbs"  items=actionsData.special label=(localize "CNC.Special") }} --}}
-
+        {{!-- Owned Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+            <ol class="items-list">
+                <li class="item flexrow item-header">
+                  <div class="item-image"></div>
+                  <div class="item-name">Name</div>
+                  <div class="item-controls">
+                    <a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i> Add item</a>
+                  </div>
+                </li>
+            {{#each actor.gear as |item id|}}
+                <li class="item flexrow" data-item-id="{{item._id}}">
+                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                    <h4 class="item-name">{{item.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
             </ol>
-          </div>
+        </div>
 
-          {{!-- Spellbook Tab --}}
-          <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/cnc/templates/actors/parts/actor-spellbook.hbs" }}
-          </div>
+        {{!-- Owned Features Tab --}}
+        <div class="tab features" data-group="primary" data-tab="features">
+            <ol class="items-list">
+                <li class="item flexrow item-header">
+                  <div class="item-image"></div>
+                  <div class="item-name">Name</div>
+                  <div class="item-controls">
+                    <a class="item-control item-create" title="Create item" data-type="feature"><i class="fas fa-plus"></i> Add item</a>
+                  </div>
+                </li>
+            {{#each actor.features as |item id|}}
+                <li class="item flexrow" data-item-id="{{item._id}}">
+                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                    <h4 class="item-name">{{item.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+            </ol>
+        </div>
 
-          {{!-- Inventory Tab --}}
-          <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "systems/cnc/templates/actors/parts/actor-inventory.hbs" sections=inventory}}
-          </div>
+        {{!-- Owned Spells Tab --}}
+        <div class="tab spells" data-group="primary" data-tab="spells">
+            <ol class="items-list">
+                <li class="item flexrow item-header">
+                  <div class="item-image"></div>
+                  <div class="item-name">Name</div>
+                  <div class="item-controls"></div>
+                </li>
+                {{#each actor.spells as |spells spellLevel|}}
+                    <li class="item flexrow item-header">
+                      <div class="item-name">Level {{spellLevel}} Spells</div>
+                      <div class="item-controls">
+                        <a class="item-control item-create" title="Create item" data-type="spell" data-spell-level="{{spellLevel}}"><i class="fas fa-plus"></i> Add LVL {{spellLevel}}</a>
+                      </div>
+                    </li>
+                    {{#each spells as |item id|}}
+                        <li class="item flexrow" data-item-id="{{item._id}}">
+                            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                            <h4 class="item-name">{{item.name}}</h4>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                    {{/each}}
+                {{/each}}
+            </ol>
+        </div>
 
-          {{!-- Features Tab --}}
-          <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/cnc/templates/actors/parts/actor-features.hbs" sections=features}}
-          </div>
-
-          {{!-- Effects Tab --}}
-          <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{!-- {{>  "systems/cnc/templates/actors/parts/active-effects.html"}} --}}
-          </div>
-
-          {{!-- Biography Tab --}}
-          <div class="tab biography flexrow" data-group="primary" data-tab="biography">
-            <div class="left-notes note-entries flexcol">
-              <article>
-                <h4 class="section-titles biopage">{{ localize "CNC.PersonalityTraits" }}</h4>
-                {{editor content=data.details.trait target="data.details.trait" button=true owner=owner editable=editable}}
-              </article>
-              <article>
-                <h4 class="section-titles biopage">{{ localize "CNC.Ideals" }}</h4>
-                {{editor content=data.details.ideal target="data.details.ideal" button=true owner=owner editable=editable}}
-              </article>
-              <article>
-                <h4 class="section-titles biopage">{{ localize "CNC.Bonds" }}</h4>
-                {{editor content=data.details.bond target="data.details.bond" button=true owner=owner editable=editable}}
-              </article>
-              <article>
-                <h4 class="section-titles biopage">{{ localize "CNC.Flaws" }}</h4>
-                {{editor content=data.details.flaw target="data.details.flaw" button=true owner=owner editable=editable}}
-              </article>
-              <article>
-                <h4 class="section-titles biopage">{{ localize "CNC.Alignment" }}</h4>
-
-                <input type="text" name="data.details.alignment" value="{{data.details.alignment}}"
-                  placeholder="{{ localize 'CNC.Alignment' }}" />
-              </article>
-            </div>
-
-            <div class="right-notes note-entries flexcol">
-              <article>
-                <h4 class="section-titles biopage">{{ localize "CNC.Appearance" }}</h4>
-                {{editor content=data.details.appearance target="data.details.appearance" button=truexswCDE098 owner=owner editable=editable}}
-              </article>
-              <article class="biography-notes big-bio">
-                <h4 class="section-titles">{{ localize "CNC.Background" }}/{{ localize "CNC.Biography" }}</h4>
-                {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
-              </article>
-            </div>
-
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
+    </section>
 </form>

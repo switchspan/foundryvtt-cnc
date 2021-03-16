@@ -51,6 +51,7 @@
     <div class="header-actions">
       <a class="rest short-rest">{{ localize 'CNC.RestS' }}<i class="fas fa-hourglass-half"></i></a>
       <a class="rest long-rest">{{ localize 'CNC.RestL' }}<i class="fas fa-hourglass-end"></i></a>
+      <p>{{localize "CNC.HitDice"}}: {{data.attributes.hd}}/{{data.details.level}}</p>
     </div>
   </section>
 
@@ -59,11 +60,11 @@
 
       <div class="ac">
         <div class="ac-symbol">
-          {{!-- {{> (cb5es-path "assets/armor-class.hbs")}} --}}
+          
         </div>
         <h4>Armor</h4>
         <div class="attribute-value">
-          <input name="data.ac.value" type="text" value="{{data.ac.value}}" data-dtype="Number"
+          <input name="data.attributes.ac.value" type="text" value="{{data.attributes.ac.value}}" data-dtype="Number"
             placeholder="10" />
         </div>
         <h4>Class</h4>
@@ -88,7 +89,7 @@
             </label>
           </div>
           <div>
-            <small><input type="text" name="data.hp.value" data-dtype="Number" placeholder="0"
+            <small><input type="text" name="data.attributes.hp.value" data-dtype="Number" placeholder="0"
                 value="{{data.attributes.hp.value}}" /></small>
             <label class="attribute-footer">
               <small>{{localize 'CNC.ActionHeal'}}</small>
